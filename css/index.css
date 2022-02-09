@@ -1,0 +1,10 @@
+html {
+   word-break: break-word;
+}
+
+body {
+   overflow-x: hidden;
+   width: 100vw;
+   padding: 0;
+   margin: 0;
+}
