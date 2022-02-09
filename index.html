@@ -1,21 +1,72 @@
-<!DOCTYPE html> 
-<html> 
-    <head> 
-        <meta charset="utf-8"> 
-        <title>동아 실무과제</title> 
-        <link rel="stylesheet" href="./css/index.css"> 
-        <link rel="stylesheet" href="./css/landing.css"> 
-    </head> 
-    <body> 
-        <div class="landing-page"> 
-            <img src="./assets/images/first_bg.png" alt="" class="bgImage">
-            <h1 class="landing-title">
-                코로나19 국내 발생 2년,<br/>
-                끝나지 않는 굴레
-            </h1>
-            <img src="./assets/icons/chevron-down.svg" alt="" class="chevron-down">
-        </div> 
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="utf-8" />
+      <title>동아 실무과제</title>
+      <link rel="stylesheet" href="./css/index.css" />
+      <link rel="stylesheet" href="./css/landing.css" />
+      <link rel="stylesheet" href="./css/map.css" />
 
-        <script src="../js/clock.js"></script> 
-    </body> 
+      <link rel="preconnect" href="https://fonts.googleapis.com" />
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+      <link
+         href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700&display=swap"
+         rel="stylesheet"
+      />
+   </head>
+   <body>
+      <div class="root">
+         <div class="container landing-container">
+            <img src="./assets/images/first_bg.png" alt="" class="bgImage" />
+            <h1 class="landing-title">
+               <img
+                  src="./assets/images/landing-title-first.png"
+                  class="landing-title-img"
+               /><br />
+               <img
+                  src="./assets/images/landing-title-second.png"
+                  class="landing-title-img"
+               />
+            </h1>
+            <img
+               src="./assets/icons/chevron-down.svg"
+               alt=""
+               class="chevron-down"
+            />
+         </div>
+
+         <div class="container map-container" id="map-container">
+            <div class="sticky">
+               <div id="map"></div>
+            </div>
+            <div class="slide-container">
+               <div class="slide">
+                  <p>안녕하세요.</p>
+               </div>
+            </div>
+            <div class="slide-container">
+               <div class="slide">
+                  <p>안녕하세요.</p>
+               </div>
+            </div>
+            <div class="slide-container">
+               <div class="slide">
+                  <p>안녕하세요.</p>
+               </div>
+            </div>
+            <div class="slide-container">
+               <div class="slide">
+                  <p>안녕하세요.</p>
+               </div>
+            </div>
+         </div>
+      </div>
+
+      <script
+         async
+         defer
+         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDk29SFwdy3PZyuFw2rVbJC1v5z4yt4oDM&callback=initMap&region=kr"
+      ></script>
+      <script src="./js/mapPage.js"></script>
+   </body>
 </html>
