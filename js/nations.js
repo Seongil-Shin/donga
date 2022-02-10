@@ -17,7 +17,7 @@ var path = d3.geoPath().projection(projection);
 //SVG container
 
 var svg = d3.select("svg#nations");
-console.log(svg);
+
 // 툴팁
 var countryTooltip = d3.select("div#countryTooltip");
 var countryTooltipTitle = countryTooltip.select(".title");
@@ -34,7 +34,7 @@ svg.append("path")
 // 데이터 불러오기
 Promise.all([
    fetch("../assets/datas/world-110m.json"),
-   fetch("../assets/datas/csvjson.json"),
+   fetch("../assets/datas/casesPer1000k.json"),
 ])
    .then(getCaseDatas)
    .then((res) => ready(res));
