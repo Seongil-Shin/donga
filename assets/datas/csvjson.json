@@ -1,0 +1,842 @@
+[
+   {
+      "location": "Afghanistan",
+      "total_cases": 0.16855,
+      "id": 4
+   },
+   {
+      "location": "Albania",
+      "total_cases": 0.266416,
+      "id": 8
+   },
+   {
+      "location": "Algeria",
+      "total_cases": 0.259673,
+      "id": 12
+   },
+   {
+      "location": "Angola",
+      "total_cases": 0.098453,
+      "id": 24
+   },
+   {
+      "location": "Argentina",
+      "total_cases": 8.675327,
+      "id": 32
+   },
+   {
+      "location": "Armenia",
+      "total_cases": 0.396885,
+      "id": 51
+   },
+   {
+      "location": "Australia",
+      "total_cases": 2.822873,
+      "id": 36
+   },
+   {
+      "location": "Austria",
+      "total_cases": 2.149623,
+      "id": 40
+   },
+   {
+      "location": "Azerbaijan",
+      "total_cases": 0.718145,
+      "id": 31
+   },
+   {
+      "location": "Bahamas",
+      "total_cases": 0.032833,
+      "id": 44
+   },
+   {
+      "location": "Bangladesh",
+      "total_cases": 1.887271,
+      "id": 50
+   },
+   {
+      "location": "Belarus",
+      "total_cases": 0.797188,
+      "id": 112
+   },
+   {
+      "location": "Belgium",
+      "total_cases": 3.386223,
+      "id": 56
+   },
+   {
+      "location": "Belize",
+      "total_cases": 0.054758,
+      "id": 84
+   },
+   {
+      "location": "Benin",
+      "total_cases": 0.026498,
+      "id": 204
+   },
+   {
+      "location": "Bhutan",
+      "total_cases": 0.006648,
+      "id": 64
+   },
+   {
+      "location": "Bolivia",
+      "total_cases": 0.878922,
+      "id": 68
+   },
+   {
+      "location": "Bosnia and Herzegovina",
+      "total_cases": 0.359876,
+      "id": 70
+   },
+   {
+      "location": "Botswana",
+      "total_cases": 0.257167,
+      "id": 72
+   },
+   {
+      "location": "Brazil",
+      "total_cases": 26.972914,
+      "id": 76
+   },
+   {
+      "location": "Brunei",
+      "total_cases": 0.018845,
+      "id": 96
+   },
+   {
+      "location": "Bulgaria",
+      "total_cases": 1.018851,
+      "id": 100
+   },
+   {
+      "location": "Burkina Faso",
+      "total_cases": 0.020693,
+      "id": 854
+   },
+   {
+      "location": "Burundi",
+      "total_cases": 0.037756,
+      "id": 108
+   },
+   {
+      "location": "Cambodia",
+      "total_cases": 0.122206,
+      "id": 116
+   },
+   {
+      "location": "Cameroon",
+      "total_cases": 0.117676,
+      "id": 120
+   },
+   {
+      "location": "Canada",
+      "total_cases": 3.159212,
+      "id": 124
+   },
+   {
+      "location": "Central African Republic",
+      "total_cases": 0.01411,
+      "id": 140
+   },
+   {
+      "location": "Chad",
+      "total_cases": 0.007216,
+      "id": 148
+   },
+   {
+      "location": "Chile",
+      "total_cases": 2.466098,
+      "id": 152
+   },
+   {
+      "location": "China",
+      "total_cases": 0.106663,
+      "id": 156
+   },
+   {
+      "location": "Colombia",
+      "total_cases": 5.994301,
+      "id": 170
+   },
+   {
+      "location": "Congo",
+      "total_cases": 0.023854,
+      "id": 178
+   },
+   {
+      "location": "Costa Rica",
+      "total_cases": 0.745949,
+      "id": 188
+   },
+   {
+      "location": "Cote d'Ivoire",
+      "total_cases": 0.081005,
+      "id": 384
+   },
+   {
+      "location": "Croatia",
+      "total_cases": 0.998463,
+      "id": 191
+   },
+   {
+      "location": "Cuba",
+      "total_cases": 1.056846,
+      "id": 192
+   },
+   {
+      "location": "Cyprus",
+      "total_cases": 0.280643,
+      "id": 196
+   },
+   {
+      "location": "Czechia",
+      "total_cases": 3.311152,
+      "id": 203
+   },
+   {
+      "location": "Democratic Republic of Congo",
+      "total_cases": 0.085708,
+      "id": 180
+   },
+   {
+      "location": "Denmark",
+      "total_cases": 2.142809,
+      "id": 208
+   },
+   {
+      "location": "Djibouti",
+      "total_cases": 0.015527,
+      "id": 262
+   },
+   {
+      "location": "Dominican Republic",
+      "total_cases": 0.565862,
+      "id": 214
+   },
+   {
+      "location": "Ecuador",
+      "total_cases": 0.769149,
+      "id": 218
+   },
+   {
+      "location": "Egypt",
+      "total_cases": 0.446308,
+      "id": 818
+   },
+   {
+      "location": "El Salvador",
+      "total_cases": 0.135109,
+      "id": 222
+   },
+   {
+      "location": "Equatorial Guinea",
+      "total_cases": 0.01585,
+      "id": 226
+   },
+   {
+      "location": "Eritrea",
+      "total_cases": 0.009652,
+      "id": 232
+   },
+   {
+      "location": "Estonia",
+      "total_cases": 0.398519,
+      "id": 233
+   },
+   {
+      "location": "Eswatini",
+      "total_cases": 0.068702,
+      "id": 748
+   },
+   {
+      "location": "Ethiopia",
+      "total_cases": 0.467001,
+      "id": 231
+   },
+   {
+      "location": "Falkland Islands",
+      "total_cases": 0.000091,
+      "id": 238
+   },
+   {
+      "location": "Fiji",
+      "total_cases": 0.063398,
+      "id": 242
+   },
+   {
+      "location": "Finland",
+      "total_cases": 0.546782,
+      "id": 246
+   },
+   {
+      "location": "France",
+      "total_cases": 21.091589,
+      "id": 250
+   },
+   {
+      "location": "Gabon",
+      "total_cases": 0.047399,
+      "id": 266
+   },
+   {
+      "location": "Gambia",
+      "total_cases": 0.011911,
+      "id": 270
+   },
+   {
+      "location": "Georgia",
+      "total_cases": 1.375615,
+      "id": 268
+   },
+   {
+      "location": "Germany",
+      "total_cases": 11.832331,
+      "id": 276
+   },
+   {
+      "location": "Ghana",
+      "total_cases": 0.157751,
+      "id": 288
+   },
+   {
+      "location": "Greece",
+      "total_cases": 2.109999,
+      "id": 300
+   },
+   {
+      "location": "Greenland",
+      "total_cases": 0.0113,
+      "id": 304
+   },
+   {
+      "location": "Guatemala",
+      "total_cases": 0.720802,
+      "id": 320
+   },
+   {
+      "location": "Guinea",
+      "total_cases": 0.036297,
+      "id": 324
+   },
+   {
+      "location": "Guinea-Bissau",
+      "total_cases": 0.007813,
+      "id": 624
+   },
+   {
+      "location": "Guyana",
+      "total_cases": 0.061901,
+      "id": 328
+   },
+   {
+      "location": "Haiti",
+      "total_cases": 0.029888,
+      "id": 332
+   },
+   {
+      "location": "Honduras",
+      "total_cases": 0.391874,
+      "id": 340
+   },
+   {
+      "location": "Hungary",
+      "total_cases": 1.671547,
+      "id": 348
+   },
+   {
+      "location": "Iceland",
+      "total_cases": 0.081981,
+      "id": 352
+   },
+   {
+      "location": "India",
+      "total_cases": 42.47806,
+      "id": 356
+   },
+   {
+      "location": "Indonesia",
+      "total_cases": 4.580093,
+      "id": 360
+   },
+   {
+      "location": "Iran",
+      "total_cases": 6.696927,
+      "id": 364
+   },
+   {
+      "location": "Iraq",
+      "total_cases": 2.263525,
+      "id": 368
+   },
+   {
+      "location": "Ireland",
+      "total_cases": 1.230539,
+      "id": 372
+   },
+   {
+      "location": "Israel",
+      "total_cases": 3.316228,
+      "id": 376
+   },
+   {
+      "location": "Italy",
+      "total_cases": 11.847436,
+      "id": 380
+   },
+   {
+      "location": "Jamaica",
+      "total_cases": 0.126437,
+      "id": 388
+   },
+   {
+      "location": "Japan",
+      "total_cases": 3.576261,
+      "id": 392
+   },
+   {
+      "location": "Jordan",
+      "total_cases": 1.39643,
+      "id": 400
+   },
+   {
+      "location": "Kazakhstan",
+      "total_cases": 1.370466,
+      "id": 398
+   },
+   {
+      "location": "Kenya",
+      "total_cases": 0.322274,
+      "id": 404
+   },
+   {
+      "location": "Kuwait",
+      "total_cases": 0.590565,
+      "id": 414
+   },
+   {
+      "location": "Kyrgyzstan",
+      "total_cases": 0.199714,
+      "id": 417
+   },
+   {
+      "location": "Laos",
+      "total_cases": 0.137557,
+      "id": 418
+   },
+   {
+      "location": "Latvia",
+      "total_cases": 0.47673,
+      "id": 428
+   },
+   {
+      "location": "Lebanon",
+      "total_cases": 0.993095,
+      "id": 422
+   },
+   {
+      "location": "Lesotho",
+      "total_cases": 0.03235,
+      "id": 426
+   },
+   {
+      "location": "Liberia",
+      "total_cases": 0.007346,
+      "id": 430
+   },
+   {
+      "location": "Libya",
+      "total_cases": 0.459548,
+      "id": 434
+   },
+   {
+      "location": "Lithuania",
+      "total_cases": 0.776794,
+      "id": 440
+   },
+   {
+      "location": "Luxembourg",
+      "total_cases": 0.171452,
+      "id": 442
+   },
+   {
+      "location": "Madagascar",
+      "total_cases": 0.061434,
+      "id": 450
+   },
+   {
+      "location": "Malawi",
+      "total_cases": 0.084915,
+      "id": 454
+   },
+   {
+      "location": "Malaysia",
+      "total_cases": 2.956332,
+      "id": 458
+   },
+   {
+      "location": "Mali",
+      "total_cases": 0.030236,
+      "id": 466
+   },
+   {
+      "location": "Mauritania",
+      "total_cases": 0.058527,
+      "id": 478
+   },
+   {
+      "location": "Mexico",
+      "total_cases": 5.192008,
+      "id": 484
+   },
+   {
+      "location": "Moldova",
+      "total_cases": 0.474548,
+      "id": 498
+   },
+   {
+      "location": "Mongolia",
+      "total_cases": 0.863372,
+      "id": 496
+   },
+   {
+      "location": "Montenegro",
+      "total_cases": 0.224793,
+      "id": 499
+   },
+   {
+      "location": "Morocco",
+      "total_cases": 1.151081,
+      "id": 504
+   },
+   {
+      "location": "Mozambique",
+      "total_cases": 0.224494,
+      "id": 508
+   },
+   {
+      "location": "Myanmar",
+      "total_cases": 0.540597,
+      "id": 104
+   },
+   {
+      "location": "Namibia",
+      "total_cases": 0.156519,
+      "id": 516
+   },
+   {
+      "location": "Nepal",
+      "total_cases": 0.970462,
+      "id": 524
+   },
+   {
+      "location": "Netherlands",
+      "total_cases": 5.446024,
+      "id": 528
+   },
+   {
+      "location": "New Caledonia",
+      "total_cases": 0.032895,
+      "id": 540
+   },
+   {
+      "location": "New Zealand",
+      "total_cases": 0.018837,
+      "id": 554
+   },
+   {
+      "location": "Nicaragua",
+      "total_cases": 0.017791,
+      "id": 558
+   },
+   {
+      "location": "Niger",
+      "total_cases": 0.0087,
+      "id": 562
+   },
+   {
+      "location": "Nigeria",
+      "total_cases": 0.253875,
+      "id": 566
+   },
+   {
+      "location": "North Macedonia",
+      "total_cases": 0.282147,
+      "id": 807
+   },
+   {
+      "location": "Norway",
+      "total_cases": 0.962407,
+      "id": 578
+   },
+   {
+      "location": "Oman",
+      "total_cases": 0.359256,
+      "id": 512
+   },
+   {
+      "location": "Pakistan",
+      "total_cases": 1.474075,
+      "id": 586
+   },
+   {
+      "location": "Palestine",
+      "total_cases": 0.594037,
+      "id": 275
+   },
+   {
+      "location": "Panama",
+      "total_cases": 0.735235,
+      "id": 591
+   },
+   {
+      "location": "Papua New Guinea",
+      "total_cases": 0.037983,
+      "id": 598
+   },
+   {
+      "location": "Paraguay",
+      "total_cases": 0.615911,
+      "id": 600
+   },
+   {
+      "location": "Peru",
+      "total_cases": 3.397637,
+      "id": 604
+   },
+   {
+      "location": "Philippines",
+      "total_cases": 3.623176,
+      "id": 608
+   },
+   {
+      "location": "Poland",
+      "total_cases": 5.258785,
+      "id": 616
+   },
+   {
+      "location": "Portugal",
+      "total_cases": 2.99777,
+      "id": 620
+   },
+   {
+      "location": "Qatar",
+      "total_cases": 0.348141,
+      "id": 634
+   },
+   {
+      "location": "Romania",
+      "total_cases": 2.482394,
+      "id": 642
+   },
+   {
+      "location": "Russia",
+      "total_cases": 13.128679,
+      "id": 643
+   },
+   {
+      "location": "Rwanda",
+      "total_cases": 0.12921,
+      "id": 646
+   },
+   {
+      "location": "Saudi Arabia",
+      "total_cases": 0.719136,
+      "id": 682
+   },
+   {
+      "location": "Senegal",
+      "total_cases": 0.085282,
+      "id": 686
+   },
+   {
+      "location": "Serbia",
+      "total_cases": 1.806086,
+      "id": 688
+   },
+   {
+      "location": "Sierra Leone",
+      "total_cases": 0.007638,
+      "id": 694
+   },
+   {
+      "location": "Slovakia",
+      "total_cases": 1.765914,
+      "id": 703
+   },
+   {
+      "location": "Slovenia",
+      "total_cases": 0.816299,
+      "id": 705
+   },
+   {
+      "location": "Solomon Islands",
+      "total_cases": 0.003795,
+      "id": 90
+   },
+   {
+      "location": "Somalia",
+      "total_cases": 0.026203,
+      "id": 706
+   },
+   {
+      "location": "South Africa",
+      "total_cases": 3.631642,
+      "id": 710
+   },
+   {
+      "location": "South Korea",
+      "total_cases": 1.185361,
+      "id": 410
+   },
+   {
+      "location": "South Sudan",
+      "total_cases": 0.016873,
+      "id": 728
+   },
+   {
+      "location": "Spain",
+      "total_cases": 10.502141,
+      "id": 724
+   },
+   {
+      "location": "Sri Lanka",
+      "total_cases": 0.623248,
+      "id": 144
+   },
+   {
+      "location": "Sudan",
+      "total_cases": 0.059345,
+      "id": 729
+   },
+   {
+      "location": "Suriname",
+      "total_cases": 0.076498,
+      "id": 740
+   },
+   {
+      "location": "Sweden",
+      "total_cases": 2.372637,
+      "id": 752
+   },
+   {
+      "location": "Switzerland",
+      "total_cases": 2.489172,
+      "id": 756
+   },
+   {
+      "location": "Syria",
+      "total_cases": 0.052243,
+      "id": 760
+   },
+   {
+      "location": "Taiwan",
+      "total_cases": 0.019293,
+      "id": 158
+   },
+   {
+      "location": "Tajikistan",
+      "total_cases": 0.017753,
+      "id": 762
+   },
+   {
+      "location": "Tanzania",
+      "total_cases": 0.033436,
+      "id": 834
+   },
+   {
+      "location": "Thailand",
+      "total_cases": 2.545873,
+      "id": 764
+   },
+   {
+      "location": "Timor",
+      "total_cases": 0.020942,
+      "id": 626
+   },
+   {
+      "location": "Togo",
+      "total_cases": 0.036612,
+      "id": 768
+   },
+   {
+      "location": "Trinidad and Tobago",
+      "total_cases": 0.117525,
+      "id": 780
+   },
+   {
+      "location": "Tunisia",
+      "total_cases": 0.954726,
+      "id": 788
+   },
+   {
+      "location": "Turkey",
+      "total_cases": 12.554674,
+      "id": 792
+   },
+   {
+      "location": "Uganda",
+      "total_cases": 0.16251,
+      "id": 800
+   },
+   {
+      "location": "Ukraine",
+      "total_cases": 4.582137,
+      "id": 804
+   },
+   {
+      "location": "United Arab Emirates",
+      "total_cases": 0.862514,
+      "id": 784
+   },
+   {
+      "location": "United Kingdom",
+      "total_cases": 18.045697,
+      "id": 826
+   },
+   {
+      "location": "United States",
+      "total_cases": 77.267254,
+      "id": 840
+   },
+   {
+      "location": "Uruguay",
+      "total_cases": 0.749554,
+      "id": 858
+   },
+   {
+      "location": "Uzbekistan",
+      "total_cases": 0.231179,
+      "id": 860
+   },
+   {
+      "location": "Vanuatu",
+      "total_cases": 0.000007,
+      "id": 548
+   },
+   {
+      "location": "Venezuela",
+      "total_cases": 0.499537,
+      "id": 862
+   },
+   {
+      "location": "Vietnam",
+      "total_cases": 2.404651,
+      "id": 704
+   },
+   {
+      "location": "Yemen",
+      "total_cases": 0.011579,
+      "id": 887
+   },
+   {
+      "location": "Zambia",
+      "total_cases": 0.30805,
+      "id": 894
+   },
+   {
+      "location": "Zimbabwe",
+      "total_cases": 0.23074,
+      "id": 716
+   }
+]

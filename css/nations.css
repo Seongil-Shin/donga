@@ -1,0 +1,51 @@
+.nations-container {
+   height: 100vh;
+   background-color: #2f353f;
+}
+
+#nations {
+   cursor: move;
+}
+
+.water {
+   fill: #fff;
+   opacity: 0.2;
+}
+
+.land {
+   fill: rgba(67, 73, 83, 0.5);
+   stroke: #fff;
+   stroke-width: 0.7px;
+}
+
+.land-selected {
+   fill: rgb(67, 73, 83);
+   stroke: #fff;
+   opacity: 1;
+   stroke-width: 0.7px;
+}
+
+.land-selected:hover {
+   fill: #ff6f6e;
+   stroke-width: 1px;
+}
+
+.countryTooltip {
+   position: absolute;
+   display: none;
+   pointer-events: none;
+   background: rgba(67, 73, 83, 0.8);
+   padding: 1rem;
+   text-align: center;
+   border-radius: 1rem;
+   color: white;
+
+   filter: drop-shadow(0 10px 8px rgb(0 0 0 / 0.04))
+      drop-shadow(0 4px 3px rgb(0 0 0 / 0.1));
+}
+
+.countryTooltip > .title {
+   font-size: 1.2rem;
+   font-weight: bold;
+   margin-bottom: 0.5rem;
+}
