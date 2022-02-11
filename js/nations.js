@@ -113,13 +113,12 @@ function ready(values) {
          nationsCountryTooltip
             .style("left", d3.event.pageX + 7 + "px")
             .style("top", d3.event.pageY - 15 + "px")
-            .style("display", "block")
             .style("opacity", 1);
          nationsCountryTooltipTitle.text(countryById[d.id].location);
          nationsCountryTooltipCases.text(countryById[d.id].total_cases);
       })
       .on("mouseout", function (d) {
-         nationsCountryTooltip.style("opacity", 0).style("display", "none");
+         nationsCountryTooltip.style("opacity", 0);
       })
       .on("mousemove", function (d) {
          nationsCountryTooltip

@@ -2,7 +2,7 @@ var margin = { top: 10, right: 30, bottom: 50, left: 60 };
 var casesGraphWidth = window.innerWidth / 2,
    casesGraphHeight = window.innerHeight / 2; // 반응형 조절
 
-// append the svg object to the body of the page
+// svg의 너비, 높이 설정하고, g를 붙인 다음 위치를 조정해줌.
 var caseGraphSvg = d3
    .select("svg#casesGraph")
    .attr("width", casesGraphWidth + margin.left + margin.right)
@@ -32,19 +32,22 @@ var graphAbsoluteOffset = {
       margin.left,
 };
 
+// 옵션 버튼
 var selectButton = d3
    .select("#selectButton")
    .style("left", graphAbsoluteOffset.left + "px")
    .style("top", graphAbsoluteOffset.top + "px");
 
-var casesKoreaPerDay;
-var casesKoreaAcc;
+var casesKoreaPerDay; // 일별 확진자 데이터
+var casesKoreaAcc; // 누적 확진자 데이터
+var currentData; // 현재 띄우는 데이터
+var graph_x, graph_xAxis, graph_y, graph_yAxis, graph_line, graph_brush; // 그래프 축, 라벨, 선, 브러시
 
-//Read the data
+//데이터 받아오기
 d3.csv(
    "../assets/datas/cases_korea.csv",
 
-   // When reading the csv, I must format variables:
+   // 받으면, 아래 형식대로 parse하여 넘겨줌.
    function (d) {
       return {
          date: d3.timeParse("%Y-%m-%d")(d.date),
@@ -53,8 +56,9 @@ d3.csv(
       };
    }
 ).then(
-   // Now I can use this dataset:
+   // 받은 데이터로 아래 함수 수행
    function (data) {
+      // 데이터 저장
       casesKoreaPerDay = data.map((item) => ({
          date: item.date,
          value: item.value,
@@ -63,39 +67,24 @@ d3.csv(
          date: item.date,
          value: item.acc,
       }));
-      var currentData = casesKoreaPerDay.map((item) => item);
-      // Add X axis --> it is a date format
-      var x = d3
-         .scaleTime()
-         .domain(
-            d3.extent(currentData, function (d) {
-               return d.date;
-            })
-         )
-         .range([0, casesGraphWidth]);
-      var xAxis = caseGraphSvg
-         .append("g")
-         .attr("transform", "translate(0," + casesGraphHeight + ")")
-         .attr("class", "myXaxis")
-         .call(d3.axisBottom(x));
 
-      // Add Y axis
-      var y = d3
-         .scaleLinear()
-         .domain([
-            0,
-            d3.max(currentData, function (d) {
-               return +d.value;
-            }),
-         ])
-         .range([casesGraphHeight, 0]);
-      var yAxis = caseGraphSvg
-         .append("g")
-         .attr("class", "myYaxis")
-         .call(d3.axisLeft(y));
+      // 맨 처음 데이터는 최근 한달
+      currentData = casesKoreaPerDay.slice(-30);
 
-      // Add a clipPath: everything out of this area won't be drawn.
-      var clip = caseGraphSvg
+      // x축을 추가
+      graph_x = d3.scaleTime().range([0, casesGraphWidth]);
+      graph_xAxis = caseGraphSvg
+         .append("g")
+         .attr("transform", "translate(0," + casesGraphHeight + ")");
+      updateXAxis();
+
+      // y축을 추가
+      graph_y = d3.scaleLinear().range([casesGraphHeight, 0]);
+      graph_yAxis = caseGraphSvg.append("g");
+      updateYAxis();
+
+      // 확대시 svg를 벗어나는 그래프가 생기는데, 이를 자르기 위한 clipPath 추가
+      caseGraphSvg
          .append("defs")
          .append("svg:clipPath")
          .attr("id", "clip")
@@ -106,7 +95,7 @@ d3.csv(
          .attr("y", 0);
 
       // Add brushing
-      var brush = d3
+      graph_brush = d3
          .brushX() // Add the brush feature using the d3.brush function
          .extent([
             [0, 0],
@@ -115,7 +104,7 @@ d3.csv(
          .on("end", updateChart); // Each time the brush selection changes, trigger the 'updateChart' function
 
       // Create the line variable: where both the line and the brush take place
-      var line = caseGraphSvg
+      graph_line = caseGraphSvg
          .append("g")
          .attr("clip-path", "url(#clip)")
          .on("mouseover", mouseover)
@@ -123,27 +112,27 @@ d3.csv(
          .on("mouseout", mouseout);
 
       // Add the line
-      line
+      graph_line
          .append("path")
          .datum(currentData)
          .attr("class", "line") // I add the class line to be able to modify this line later on.
          .attr("fill", "none")
-         .attr("stroke", "#ff6f6e")
-         .attr("stroke-width", 2.5)
          .attr(
             "d",
             d3
                .line()
                .x(function (d) {
-                  return x(d.date);
+                  return graph_x(d.date);
                })
                .y(function (d) {
-                  return y(d.value);
+                  return graph_y(d.value);
                })
-         );
+         )
+         .attr("stroke", "#ff6f6e")
+         .attr("stroke-width", 2.5);
 
       // Add the brushing
-      line.append("g").attr("class", "brush").call(brush);
+      graph_line.append("g").attr("class", "brush").call(graph_brush);
 
       // A function that set idleTimeOut to null
       var idleTimeout;
@@ -159,61 +148,28 @@ d3.csv(
          // If no selection, back to initial coordinate. Otherwise, update X axis domain
          if (!extent) {
             if (!idleTimeout) return (idleTimeout = setTimeout(idled, 350)); // This allows to wait a little bit
-            x.domain([4, 8]);
+            graph_x.domain([4, 8]);
+            updateXAxis(4, 8);
          } else {
-            x.domain([x.invert(extent[0]), x.invert(extent[1])]);
-            line.select(".brush").call(brush.move, null); // This remove the grey brush area as soon as the selection has been done
+            updateXAxis(graph_x.invert(extent[0]), graph_x.invert(extent[1]));
+            graph_line.select(".brush").call(graph_brush.move, null); // This remove the grey brush area as soon as the selection has been done
          }
 
-         // Update axis and line position
-         xAxis.transition().duration(1000).call(d3.axisBottom(x));
-         line
-            .select(".line")
-            .transition()
-            .duration(1000)
-            .attr(
-               "d",
-               d3
-                  .line()
-                  .x(function (d) {
-                     return x(d.date);
-                  })
-                  .y(function (d) {
-                     return y(d.value);
-                  })
-            );
+         updateLine(false);
       }
 
-      // If user double click, reinitialize the chart
+      // 더블클릭되었을때 초기화.
       caseGraphSvg.on("dblclick", function () {
-         x.domain(
-            d3.extent(currentData, function (d) {
-               return d.date;
-            })
-         );
-         xAxis.transition().call(d3.axisBottom(x));
-         line
-            .select(".line")
-            .transition()
-            .attr(
-               "d",
-               d3
-                  .line()
-                  .x(function (d) {
-                     return x(d.date);
-                  })
-                  .y(function (d) {
-                     return y(d.value);
-                  })
-            );
+         updateXAxis();
+         updateLine(false);
       });
 
-      // This allows to find the closest X index of the mouse:
+      // 마우스가 그래프 위에 있을때, 가장 가까운 x를 찾아줌
       var bisect = d3.bisector(function (d) {
          return d.date;
       }).left;
 
-      // Create the circle that travels along the curve of chart
+      // hover 시, 그래프에 찍을 점
       var point = caseGraphSvg
          .append("g")
          .append("circle")
@@ -222,24 +178,25 @@ d3.csv(
          .attr("r", 3)
          .attr("class", "point");
 
-      // Create the text that travels along the curve of chart
+      // hover시, 띄울 엘리먼트
       var caseGraphTooltipContainer = d3.select("div#caseGraphTooltip");
       var caseGraphTooltipTitle = caseGraphTooltipContainer.select(".title");
+      var caseGraphTooltipPrefix = caseGraphTooltipContainer.select(".prefix");
       var caseGraphTooltipContent = caseGraphTooltipContainer.select(".cases");
 
-      // What happens when the mouse move -> show the annotations at the right positions.
+      //마우스 움직임 처리 함수들
       function mouseover() {
          point.style("opacity", 1);
          caseGraphTooltipContainer.style("opacity", 1);
       }
       function mousemove() {
          // recover coordinate we need
-         var x0 = x.invert(d3.mouse(this)[0]);
+         var x0 = graph_x.invert(d3.mouse(this)[0]);
          var i = bisect(currentData, x0, 1);
          selectedData = currentData[i];
          point
-            .attr("cx", x(selectedData.date))
-            .attr("cy", y(selectedData.value));
+            .attr("cx", graph_x(selectedData.date))
+            .attr("cy", graph_y(selectedData.value));
          caseGraphTooltipTitle.text(
             selectedData.date.toISOString().slice(0, 10)
          );
@@ -248,11 +205,11 @@ d3.csv(
          caseGraphTooltipContainer
             .style(
                "left",
-               graphAbsoluteOffset.left + x(selectedData.date) + "px"
+               graphAbsoluteOffset.left + graph_x(selectedData.date) + "px"
             )
             .style(
                "top",
-               graphAbsoluteOffset.top + y(selectedData.value) + "px"
+               graphAbsoluteOffset.top + graph_y(selectedData.value) + "px"
             )
             .style("transform", `translate(-55%, -110%)`);
       }
@@ -261,65 +218,91 @@ d3.csv(
          caseGraphTooltipContainer.style("opacity", 0);
       }
 
-      d3.select("#selectButton").on("change", function (d) {
-         // recover the option that has been chosen
+      // 옵션이 변경되었을 경우, 이에 반응하는 함수등록
+      d3.select("#selectButton").on("change", function () {
          var selectedOption = d3.select(this).property("value");
          updateData(selectedOption);
       });
 
-      // A function that update the chart
+      // 옵션이 변경되었을 경우, 그래프 업데이트
       function updateData(selectedGroup) {
-         var dataFilter;
-         // Create new data with the selection?
          if (selectedGroup === "week") {
-            dataFilter = casesKoreaPerDay.slice(-7);
             currentData = casesKoreaPerDay.slice(-7);
+            caseGraphTooltipPrefix.text("국내 일일 확진자 : ");
          } else if (selectedGroup === "month") {
-            dataFilter = casesKoreaPerDay.slice(-30);
             currentData = casesKoreaPerDay.slice(-30);
+            caseGraphTooltipPrefix.text("국내 일일 확진자 : ");
          } else if (selectedGroup === "acc") {
-            dataFilter = casesKoreaAcc;
             currentData = casesKoreaAcc.map((item) => item);
-         } else {
-            dataFilter = casesKoreaPerDay;
+            caseGraphTooltipPrefix.text("국내 누적 확진자 : ");
+         } else if (selectedGroup === "perDay") {
             currentData = casesKoreaPerDay.map((item) => item);
+            caseGraphTooltipPrefix.text("국내 일일 확진자 : ");
          }
 
-         x.domain(
-            d3.extent(dataFilter, function (d) {
-               return d.date;
-            })
-         );
-         caseGraphSvg.selectAll(".myXaxis").transition().duration(2000);
-
-         // create the Y axis
-         y.domain([
-            0,
-            d3.max(dataFilter, function (d) {
-               return +d.value;
-            }),
-         ]);
-         caseGraphSvg.selectAll(".myYaxis").transition().duration(2000);
+         updateXAxis();
+         updateYAxis();
 
          // Give these new data to update line
-         line
-            .select(".line")
-            .datum(dataFilter)
-            .transition()
-            .duration(1000)
-            .attr(
-               "d",
-               d3
-                  .line()
-                  .x(function (d) {
-                     return x(d.date);
-                  })
-                  .y(function (d) {
-                     return y(+d.value);
-                  })
-            )
-            .attr("stroke", "#ff6f6e")
-            .attr("stroke-width", 2.5);
+         updateLine(true);
       }
    }
 );
+
+function updateXAxis(xmin, xmax) {
+   if (xmin && xmax) {
+      graph_x.domain([xmin, xmax]);
+   } else {
+      graph_x.domain([
+         currentData[0].date,
+         currentData[currentData.length - 1].date,
+      ]);
+   }
+   graph_xAxis.transition().call(d3.axisBottom(graph_x));
+}
+function updateYAxis() {
+   graph_y.domain([
+      0,
+      d3.max(currentData, function (d) {
+         return +d.value;
+      }),
+   ]);
+   graph_yAxis.transition().call(d3.axisLeft(graph_y));
+}
+
+function updateLine(doDatum) {
+   if (doDatum) {
+      return graph_line
+         .select(".line")
+         .datum(currentData)
+         .transition()
+         .duration(500)
+         .attr(
+            "d",
+            d3
+               .line()
+               .x(function (d) {
+                  return graph_x(d.date);
+               })
+               .y(function (d) {
+                  return graph_y(+d.value);
+               })
+         );
+   } else {
+      return graph_line
+         .select(".line")
+         .transition()
+         .duration(500)
+         .attr(
+            "d",
+            d3
+               .line()
+               .x(function (d) {
+                  return graph_x(d.date);
+               })
+               .y(function (d) {
+                  return graph_y(+d.value);
+               })
+         );
+   }
+}
