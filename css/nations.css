@@ -1,5 +1,5 @@
 .nations-container {
-   height: 200vh;
+   height: 100vh;
    background-color: #2f353f;
 }
 
@@ -28,11 +28,4 @@
 .land-selected:hover {
    fill: #ff6f6e;
    stroke-width: 1px;
-}
-
-.nation-slide {
-   background-color: #0e0301;
-}
-.nation-slide-content {
-   color: #fff;
 }

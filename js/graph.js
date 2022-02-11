@@ -69,7 +69,7 @@ d3.csv(
       }));
 
       // 맨 처음 데이터는 최근 한달
-      currentData = casesKoreaPerDay.slice(-30);
+      currentData = casesKoreaPerDay;
 
       // x축을 추가
       graph_x = d3.scaleTime().range([0, casesGraphWidth]);
