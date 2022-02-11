@@ -39,3 +39,12 @@
    font-weight: bold;
    margin-bottom: 0.5rem;
 }
+
+.graphDescription {
+   font-size: 0.8rem;
+}
+
+.graph-container #selectButton {
+   position: absolute;
+   z-index: 100;
+}
