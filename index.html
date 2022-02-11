@@ -9,6 +9,7 @@
       <link rel="stylesheet" href="./css/landing.css" />
       <link rel="stylesheet" href="./css/map.css" />
       <link rel="stylesheet" href="./css/nations.css" />
+      <link rel="stylesheet" href="./css/graph.css" />
 
       <link rel="preconnect" href="https://fonts.googleapis.com" />
       <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -43,8 +44,8 @@
                <div id="map"></div>
             </div>
             <div class="slide-container">
-               <div class="slide">
-                  <div class="slide-content">
+               <div class="slide map-slide">
+                  <div class="slide-content map-slide-content">
                      <p>
                         2020년 1월 18일<br /><br />
                         중국 후베이성 우한에 사는 A 씨(35)는 출국을 하루 앞두고
@@ -55,8 +56,8 @@
                </div>
             </div>
             <div class="slide-container">
-               <div class="slide">
-                  <div class="slide-content">
+               <div class="slide map-slide">
+                  <div class="slide-content map-slide-content">
                      <p>
                         1월 19일 오전<br /><br />
                         A 씨는 우한 공항에서 한국 인천으로 가는 비행기를 탔다.
@@ -67,8 +68,8 @@
                </div>
             </div>
             <div class="slide-container">
-               <div class="slide">
-                  <div class="slide-content">
+               <div class="slide map-slide">
+                  <div class="slide-content map-slide-content">
                      <p>
                         1월 19일 오후 12시 25분<br /><br />
                         비행기에서 내린 A 씨가 인천공항 탑승동 게이트로 향했다.
@@ -80,8 +81,8 @@
                </div>
             </div>
             <div class="slide-container">
-               <div class="slide">
-                  <div class="slide-content">
+               <div class="slide map-slide">
+                  <div class="slide-content map-slide-content">
                      <p>
                         1월 19일 오후 3시경<br /><br />
                         A 씨는 검역관과 임시격리실을 나와 공항 1층으로 나갔다.
@@ -95,19 +96,62 @@
          </div>
 
          <div id="nations-container" class="container nations-container">
-            <svg id="nations" width="100%" height="100%"></svg>
-            <div id="countryTooltip" class="countryTooltip">
-               <div class="title"></div>
-               <br />
-               <div class="tooltip-content">
-                  100만명 당 확진자 수 :&nbsp;
-                  <span class="cases"></span>
-                  명
+            <div class="sticky">
+               <svg id="nations" width="100%" height="100%"></svg>
+               <div id="countryTooltip" class="countryTooltip">
+                  <div class="title"></div>
+                  <br />
+                  <div class="tooltip-content">
+                     100만명 당 확진자 :&nbsp;
+                     <span class="cases"></span>
+                     명
+                  </div>
+               </div>
+            </div>
+            <div class="slide-container">
+               <div class="slide nation-slide">
+                  <div class="slide-content nation-slide-content">
+                     <p>
+                        첫 코로나19 확진자 발생 후 2년이 흘렀다. 코로나19는
+                        여전히 종식되지 않았다. 코로나 접종 완료율이 85%에
+                        이르고 치료제까지 나왔지만 코로나는 끝날 기미가 없다.
+                        오히려 델타보다 전파력이 3배 강한 오미크론 변이가 출현해
+                        세계적으로 5차 대유행을 일으키고 있다.
+                     </p>
+                  </div>
+               </div>
+            </div>
+         </div>
+
+         <div class="container graph-container">
+            <div class="sticky">
+               <svg id="casesGraph"></svg>
+               <div id="caseGraphTooltip" class="caseGraphTooltip">
+                  <div class="title"></div>
+                  <br />
+                  <div class="tooltip-content">
+                     일일 확진자 :
+                     <span class="cases"></span>
+                     명
+                  </div>
+               </div>
+            </div>
+            <div class="slide-container">
+               <div class="slide nation-slide">
+                  <div class="slide-content nation-slide-content">
+                     <p>
+                        국내도 오미크론 영향권에 들면서 한동안 진정세를 보이던
+                        확진자가 증가세로 돌아섰다. 2월 4일 0시 기준 일일 신규
+                        확진자는 2만7443명이다. 이날까지 누적 확진자는 93만
+                        4656명이다.
+                     </p>
+                  </div>
                </div>
             </div>
          </div>
       </div>
 
+      <script src="./js/index.js"></script>
       <script
          async
          defer
@@ -117,6 +161,9 @@
 
       <script src="https://d3js.org/d3.v5.min.js"></script>
       <script src="https://d3js.org/topojson.v1.min.js"></script>
+
       <script src="./js/nations.js"></script>
+
+      <script src="./js/graph.js"></script>
    </body>
 </html>

@@ -1,5 +1,5 @@
-var width = window.innerWidth,
-   height = window.innerHeight,
+var casesGraphWidth = window.innerWidth,
+   casesGraphHeight = window.innerHeight,
    sens = 75,
    focused;
 
@@ -9,27 +9,28 @@ var projection = d3
    .geoOrthographic()
    .scale(245)
    .rotate([-127, -37])
-   .translate([width / 2, height / 2])
+   .translate([casesGraphWidth / 2, casesGraphHeight / 2])
    .clipAngle(90);
 
-var path = d3.geoPath().projection(projection);
+var nationsPath = d3.geoPath().projection(projection);
 
 //SVG container
 
-var svg = d3.select("svg#nations");
+var nationsSvg = d3.select("svg#nations");
 
 // 툴팁
-var countryTooltip = d3.select("div#countryTooltip");
-var countryTooltipTitle = countryTooltip.select(".title");
-var countryTooltipCases = countryTooltip
+var nationsCountryTooltip = d3.select("div#countryTooltip");
+var nationsCountryTooltipTitle = nationsCountryTooltip.select(".title");
+var nationsCountryTooltipCases = nationsCountryTooltip
    .select(".tooltip-content")
    .select(".cases");
 
 //Adding water
-svg.append("path")
+nationsSvg
+   .append("path")
    .datum({ type: "Sphere" })
    .attr("class", "water")
-   .attr("d", path);
+   .attr("d", nationsPath);
 
 // 데이터 불러오기
 Promise.all([
@@ -90,42 +91,44 @@ function ready(values) {
 
    //Drawing countries on the globe
    // 데이터가 없는 국가 렌더
-   svg.selectAll("path.land")
+   nationsSvg
+      .selectAll("path.land")
       .data(countriesUnselected)
       .enter()
       .append("path")
       .attr("class", "land")
-      .attr("d", path);
+      .attr("d", nationsPath);
 
    // 데이터가 존재하는 국가 렌더
-   svg.selectAll("path.land")
+   nationsSvg
+      .selectAll("path.land")
       .data(countriesSelected)
       .enter()
       .append("path")
       .attr("class", "land-selected")
-      .attr("d", path)
+      .attr("d", nationsPath)
 
       //Mouse events
       .on("mouseover", function (d) {
-         countryTooltip
+         nationsCountryTooltip
             .style("left", d3.event.pageX + 7 + "px")
             .style("top", d3.event.pageY - 15 + "px")
             .style("display", "block")
             .style("opacity", 1);
-         countryTooltipTitle.text(countryById[d.id].location);
-         countryTooltipCases.text(countryById[d.id].total_cases);
+         nationsCountryTooltipTitle.text(countryById[d.id].location);
+         nationsCountryTooltipCases.text(countryById[d.id].total_cases);
       })
       .on("mouseout", function (d) {
-         countryTooltip.style("opacity", 0).style("display", "none");
+         nationsCountryTooltip.style("opacity", 0).style("display", "none");
       })
       .on("mousemove", function (d) {
-         countryTooltip
+         nationsCountryTooltip
             .style("left", d3.event.pageX + 7 + "px")
             .style("top", d3.event.pageY - 15 + "px");
       });
 
    //Drag event
-   svg.call(
+   nationsSvg.call(
       d3.drag().on("drag", () => {
          const rotate = projection.rotate();
          const k = sens / projection.scale();
@@ -133,8 +136,8 @@ function ready(values) {
             rotate[0] + d3.event.dx * k,
             rotate[1] - d3.event.dy * k,
          ]);
-         path = d3.geoPath().projection(projection);
-         svg.selectAll("path").attr("d", path);
+         nationsPath = d3.geoPath().projection(projection);
+         nationsSvg.selectAll("path").attr("d", nationsPath);
       })
    );
 }

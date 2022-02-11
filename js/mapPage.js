@@ -41,7 +41,7 @@ function handleScrollEvent(e) {
       for (let i = 0; i < 4; i++) {
          if (
             scrollTop >= (i + 1) * wHeight + wHeight * 0.2 &&
-            scrollTop <= (i + 1) * wHeight + wHeight * 0.8 + 50 &&
+            scrollTop <= (i + 1) * wHeight + wHeight * 0.8 &&
             window.canTrigger[i]
          ) {
             map.setZoom(mapLocation[i].zoom - 1);

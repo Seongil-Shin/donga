@@ -1,0 +1,41 @@
+.graph-container {
+   height: 200vh;
+   background-color: #5f656f;
+}
+
+#casesGraph {
+   position: absolute;
+   top: 50%;
+   left: 50%;
+
+   background-color: #f9f9f9;
+   border-radius: 1rem;
+
+   overflow: visible;
+   transform: translate(-50%, -50%);
+}
+
+#casesGraph .point {
+   opacity: 0;
+   z-index: 10;
+}
+
+.caseGraphTooltip {
+   position: absolute;
+   opacity: 0;
+   pointer-events: none;
+   background: rgba(67, 73, 83, 0.8);
+   padding: 1rem;
+   text-align: center;
+   border-radius: 1rem;
+   color: white;
+
+   filter: drop-shadow(0 10px 8px rgb(0 0 0 / 0.04))
+      drop-shadow(0 4px 3px rgb(0 0 0 / 0.1));
+}
+
+.caseGraphTooltip > .title {
+   font-size: 1.2rem;
+   font-weight: bold;
+   margin-bottom: 0.5rem;
+}

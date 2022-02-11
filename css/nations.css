@@ -1,5 +1,5 @@
 .nations-container {
-   height: 100vh;
+   height: 200vh;
    background-color: #2f353f;
 }
 
@@ -48,4 +48,11 @@
    font-size: 1.2rem;
    font-weight: bold;
    margin-bottom: 0.5rem;
+}
+
+.nation-slide {
+   background-color: #0e0301;
+}
+.nation-slide-content {
+   color: #fff;
 }

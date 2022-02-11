@@ -2,37 +2,15 @@
    height: 500vh;
 }
 
-.sticky {
-   position: sticky;
-   top: 0;
-   width: 100%;
-   height: 100vh;
-}
 #map {
    width: 100%;
    height: 100vh;
 }
 
-.slide-container {
-   position: relative;
-   width: 100vw;
-   height: 100vh;
-}
-.slide {
-   position: absolute;
-   top: 0;
-   left: 50%;
-   max-width: 30%; /* 반응형 조절*/
-
-   transform: translateX(-50%);
-   padding: 1rem;
-   text-align: left;
-
+.map-slide {
    background-color: #0e0301;
-   border-radius: 1rem;
-   filter: drop-shadow(0 10px 8px rgb(0 0 0 / 0.04))
-      drop-shadow(0 4px 3px rgb(0 0 0 / 0.1));
 }
-.slide-content {
+
+.map-slide-content {
    color: #fff;
 }
