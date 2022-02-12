@@ -2,14 +2,29 @@
 <html lang="ko">
    <head>
       <meta charset="utf-8" />
+      <link rel="icon" href="/favicon.png" />
       <meta name="viewport" content="width=device-width, initial-scale=1" />
       <title>동아 실무과제</title>
+      <meta
+         name="description"
+         content="신성일의 동아미디어그룹 인턴 실무 과제 프로젝트입니다."
+      />
+      <meta property="og:type" content="website" />
+      <meta property="og:url" content="https://example.com/page.html" />
+      <meta property="og:title" content="신성일의 동아 실무과제" />
+      <meta property="og:image" content="https://example.com/logo.png" />
+      <meta
+         property="og:description"
+         content="신성일의 동아미디어그룹 인턴 실무 과제 프로젝트입니다."
+      />
+      <meta property="og:site_name" content="신성일의 동아 실무과제" />
+      <meta property="og:locale" content="ko" />
 
-      <link rel="stylesheet" href="./css/index.css" />
-      <link rel="stylesheet" href="./css/landing.css" />
-      <link rel="stylesheet" href="./css/map.css" />
-      <link rel="stylesheet" href="./css/globe.css" />
-      <link rel="stylesheet" href="./css/graph.css" />
+      <link rel="stylesheet" href="/css/index.css" />
+      <link rel="stylesheet" href="/css/landing.css" />
+      <link rel="stylesheet" href="/css/map.css" />
+      <link rel="stylesheet" href="/css/globe.css" />
+      <link rel="stylesheet" href="/css/graph.css" />
 
       <link rel="preconnect" href="https://fonts.googleapis.com" />
       <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -20,8 +35,8 @@
    </head>
 
    <body>
-      <div id="root">
-         <div class="container landing-container">
+      <main id="root">
+         <article class="container landing-container">
             <h1 class="landing-title">
                <img
                   src="./assets/images/landing-title-first.png"
@@ -37,13 +52,13 @@
                alt=""
                class="chevron-down"
             />
-         </div>
+         </article>
 
-         <div class="container map-container" id="map-container">
-            <div class="sticky">
+         <article class="container map-container" id="map-container">
+            <section class="sticky">
                <div id="map"></div>
-            </div>
-            <div class="slide-container">
+            </section>
+            <section class="slide-container">
                <div class="slide movable-slide">
                   <div class="slide-content">
                      <p>
@@ -54,8 +69,8 @@
                      </p>
                   </div>
                </div>
-            </div>
-            <div class="slide-container">
+            </section>
+            <section class="slide-container">
                <div class="slide movable-slide">
                   <div class="slide-content">
                      <p>
@@ -66,8 +81,8 @@
                      </p>
                   </div>
                </div>
-            </div>
-            <div class="slide-container">
+            </section>
+            <section class="slide-container">
                <div class="slide movable-slide">
                   <div class="slide-content">
                      <p>
@@ -79,8 +94,8 @@
                      </p>
                   </div>
                </div>
-            </div>
-            <div class="slide-container">
+            </section>
+            <section class="slide-container">
                <div class="slide movable-slide">
                   <div class="slide-content">
                      <p>
@@ -92,12 +107,12 @@
                      </p>
                   </div>
                </div>
-            </div>
-         </div>
+            </section>
+         </article>
 
-         <div id="nations-container" class="container nations-container">
+         <article id="nations-container" class="container nations-container">
             <svg id="nations" width="100%" height="100%"></svg>
-            <div id="countryTooltip" class="tootip-container">
+            <section id="countryTooltip" class="tootip-container">
                <div class="title"></div>
                <br />
                <div class="tooltip-content">
@@ -105,8 +120,8 @@
                   <span class="cases"></span>
                   명
                </div>
-            </div>
-            <div class="slide fixed-slide">
+            </section>
+            <section class="slide fixed-slide">
                <div class="slide-content">
                   <p>
                      첫 코로나19 확진자 발생 후 2년이 흘렀다. 코로나19는 여전히
@@ -116,11 +131,11 @@
                      세계적으로 <b>5차 대유행</b>을 일으키고 있다.
                   </p>
                </div>
-            </div>
-         </div>
+            </section>
+         </article>
 
-         <div class="container graph-container">
-            <div>
+         <article class="container graph-container">
+            <section>
                <select id="selectButton">
                   <option value="perDay">전체 일별</option>
                   <option value="acc">전체 누적</option>
@@ -137,8 +152,8 @@
                      명
                   </div>
                </div>
-            </div>
-            <div class="slide fixed-slide">
+            </section>
+            <section class="slide fixed-slide">
                <div class="slide-content">
                   <p>
                      국내도 오미크론 영향권에 들면서 한동안 진정세를 보이던
@@ -147,19 +162,19 @@
                      이날까지 누적 확진자는 <b>93만 4656명</b>이다.
                   </p>
                </div>
-            </div>
-         </div>
-      </div>
+            </section>
+         </article>
+      </main>
 
-      <script src="./js/index.js"></script>
+      <script src="/js/index.js"></script>
       <script
          defer
          src="https://maps.googleapis.com/maps/api/js?v=beta&key=AIzaSyDk29SFwdy3PZyuFw2rVbJC1v5z4yt4oDM&callback=initMap&region=kr"
       ></script>
-      <script src="./js/mapPage.js"></script>
+      <script src="/js/mapPage.js"></script>
       <script src="https://d3js.org/d3.v5.min.js"></script>
       <script src="https://d3js.org/topojson.v1.min.js"></script>
-      <script src="./js/nations.js"></script>
-      <script src="./js/graph.js"></script>
+      <script src="/js/nations.js"></script>
+      <script src="/js/graph.js"></script>
    </body>
 </html>

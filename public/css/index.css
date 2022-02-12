@@ -1,0 +1,255 @@
+html {
+   word-break: break-word;
+}
+
+body {
+   padding: 0;
+   margin: 0;
+   font-family: "Nanum Gothic", sans-serif;
+}
+
+p {
+   margin: 0px;
+}
+#root {
+   width: 100vw;
+   height: 100vh;
+   overflow-x: hidden;
+   overflow-y: scroll;
+   scroll-snap-type: y proximity;
+}
+
+.container {
+   scroll-snap-align: start;
+
+   position: relative;
+   width: 100%;
+   text-align: center;
+}
+
+.sticky {
+   position: sticky;
+   top: 0;
+   width: 100%;
+   height: 100vh;
+}
+
+.slide-container {
+   position: relative;
+   width: 100vw;
+   height: 100vh;
+   pointer-events: none;
+}
+
+.slide {
+   pointer-events: auto;
+   position: absolute;
+   top: 10px;
+   left: 50%;
+   width: 90%; /* 반응형 조절*/
+
+   transform: translateX(-50%);
+   padding: 1rem;
+   text-align: left;
+
+   background-color: #0e0301;
+   border-radius: 1rem;
+}
+/*
+   한 곳에 고정되어있는 slide
+   slide-container로 감싸줄 필요없음.
+*/
+.fixed-slide {
+}
+
+/* 스크롤에 따라 위로 올라가는 slide.
+   slide-container로 감싸줘야함.
+*/
+.movable-slide {
+   filter: drop-shadow(0 10px 8px rgb(0 0 0 / 0.04))
+      drop-shadow(0 4px 3px rgb(0 0 0 / 0.1));
+}
+
+.slide > .slide-content {
+   color: white;
+}
+
+.tootip-container {
+   position: absolute;
+   opacity: 0;
+   width: 250px;
+   pointer-events: none;
+   background: rgba(67, 73, 83, 0.8);
+   padding: 1rem;
+   text-align: center;
+   border-radius: 1rem;
+   color: white;
+
+   filter: drop-shadow(0 10px 8px rgb(0 0 0 / 0.04))
+      drop-shadow(0 4px 3px rgb(0 0 0 / 0.1));
+}
+
+.tootip-container > .title {
+   font-size: 1.2rem;
+   font-weight: bold;
+   margin-bottom: 0.5rem;
+}
+
+/* 랜딩 페이지 스타일 */
+.landing-container {
+   height: 100vh;
+
+   background-image: url("../assets/images/first_bg.png");
+   background-size: cover;
+}
+
+.landing-title {
+   position: absolute;
+   margin: 0;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -80%);
+
+   width: 100%;
+}
+
+.landing-title-img {
+   width: 100%;
+}
+
+.chevron-down {
+   position: absolute;
+   width: 5vmax;
+   bottom: 0;
+   left: 50%;
+
+   cursor: pointer;
+
+   animation: bounce 1s infinite;
+}
+
+@keyframes bounce {
+   0%,
+   100% {
+      transform: translate(-50%, -25%);
+      animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+   }
+   50% {
+      transform: translate(-50%, 0);
+      animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+   }
+}
+
+/* 지도 페이지 스타일 */
+.map-container {
+   height: 500vh;
+}
+
+#map {
+   width: 100%;
+   height: 100vh;
+}
+
+/* 지구본 페이지 스타일 */
+.nations-container {
+   height: 100vh;
+   background-color: #2f353f;
+}
+
+#nations {
+   cursor: move;
+}
+
+.water {
+   fill: #fff;
+   opacity: 0.2;
+}
+
+.land {
+   fill: rgba(67, 73, 83, 0.5);
+   stroke: #fff;
+   stroke-width: 0.7px;
+}
+
+.land-selected {
+   fill: rgb(67, 73, 83);
+   stroke: #fff;
+   opacity: 1;
+   stroke-width: 0.7px;
+}
+
+.land-selected:hover,
+.land-selected-fill {
+   fill: #ff6f6e;
+   stroke-width: 1px;
+}
+
+/* 그래프 페이지 스타일 */
+.graph-container {
+   height: 100vh;
+   background-color: #5f656f;
+}
+
+#casesGraph {
+   position: absolute;
+   top: 50%;
+   left: 50%;
+
+   background-color: #f9f9f9;
+   border-radius: 1rem;
+
+   overflow: visible;
+   transform: translate(-50%, -50%);
+}
+
+#casesGraph .point {
+   opacity: 0;
+   z-index: 10;
+}
+
+.graphDescription {
+   font-size: 0.8rem;
+}
+
+.graph-container #selectButton {
+   position: absolute;
+   z-index: 100;
+}
+
+/* 반응형 조절 */
+@media screen and (min-width: 768px) {
+   p {
+      margin: 5px 0px;
+   }
+   .slide {
+      width: 80%;
+   }
+   .landing-title {
+      width: 70%;
+   }
+}
+@media screen and (min-width: 1024px) {
+   .slide {
+      width: 60%;
+   }
+}
+@media screen and (min-width: 1280px) {
+   p {
+      margin: 10px 0px;
+   }
+   .slide {
+      width: 50%;
+   }
+
+   .landing-title {
+      width: 60%;
+   }
+}
+@media screen and (min-width: 1546px) {
+   .slide {
+      width: 40%;
+   }
+   .landing-title {
+      width: 50%;
+   }
+}

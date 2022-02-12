@@ -2,7 +2,7 @@ var sens = 75,
    focused;
 
 var globeScale = returnVariableByWidth([
-   150, 200, 250, 150, 200, 250, 300, 350,
+   150, 200, 250, 200, 200, 250, 300, 350,
 ]);
 
 //Setting projection
@@ -20,7 +20,7 @@ var nationsPath = d3.geoPath().projection(projection);
 var nationsSvg = d3.select("svg#nations");
 
 // 툴팁
-var nationsCountryTooltip = d3.select("div#countryTooltip");
+var nationsCountryTooltip = d3.select("section#countryTooltip");
 var nationsCountryTooltipTitle = nationsCountryTooltip.select(".title");
 var nationsCountryTooltipCases = nationsCountryTooltip
    .select(".tooltip-content")

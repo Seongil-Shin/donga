@@ -1,0 +1,842 @@
+[
+   {
+      "location": "아프가니스탄",
+      "total_cases": 0.16855,
+      "id": 4
+   },
+   {
+      "location": "알바니아",
+      "total_cases": 0.266416,
+      "id": 8
+   },
+   {
+      "location": "알제리",
+      "total_cases": 0.259673,
+      "id": 12
+   },
+   {
+      "location": "앙골라",
+      "total_cases": 0.098453,
+      "id": 24
+   },
+   {
+      "location": "아르헨티나",
+      "total_cases": 8.675327,
+      "id": 32
+   },
+   {
+      "location": "아르메니아",
+      "total_cases": 0.396885,
+      "id": 51
+   },
+   {
+      "location": "오스트레일리아",
+      "total_cases": 2.822873,
+      "id": 36
+   },
+   {
+      "location": "오스트리아",
+      "total_cases": 2.149623,
+      "id": 40
+   },
+   {
+      "location": "아제르바이잔",
+      "total_cases": 0.718145,
+      "id": 31
+   },
+   {
+      "location": "바하마",
+      "total_cases": 0.032833,
+      "id": 44
+   },
+   {
+      "location": "방글라데시",
+      "total_cases": 1.887271,
+      "id": 50
+   },
+   {
+      "location": "벨라루스",
+      "total_cases": 0.797188,
+      "id": 112
+   },
+   {
+      "location": "벨기에",
+      "total_cases": 3.386223,
+      "id": 56
+   },
+   {
+      "location": "벨리즈",
+      "total_cases": 0.054758,
+      "id": 84
+   },
+   {
+      "location": "베냉",
+      "total_cases": 0.026498,
+      "id": 204
+   },
+   {
+      "location": "부탄",
+      "total_cases": 0.006648,
+      "id": 64
+   },
+   {
+      "location": "볼리비아",
+      "total_cases": 0.878922,
+      "id": 68
+   },
+   {
+      "location": "보스니아 헤르체고비나",
+      "total_cases": 0.359876,
+      "id": 70
+   },
+   {
+      "location": "보츠와나",
+      "total_cases": 0.257167,
+      "id": 72
+   },
+   {
+      "location": "브라질",
+      "total_cases": 26.972914,
+      "id": 76
+   },
+   {
+      "location": "브루나이",
+      "total_cases": 0.018845,
+      "id": 96
+   },
+   {
+      "location": "불가리아",
+      "total_cases": 1.018851,
+      "id": 100
+   },
+   {
+      "location": "부르키나 파소",
+      "total_cases": 0.020693,
+      "id": 854
+   },
+   {
+      "location": "부룬디",
+      "total_cases": 0.037756,
+      "id": 108
+   },
+   {
+      "location": "캄보디아",
+      "total_cases": 0.122206,
+      "id": 116
+   },
+   {
+      "location": "카메룬",
+      "total_cases": 0.117676,
+      "id": 120
+   },
+   {
+      "location": "캐나다",
+      "total_cases": 3.159212,
+      "id": 124
+   },
+   {
+      "location": "중앙아프리카 공화국",
+      "total_cases": 0.01411,
+      "id": 140
+   },
+   {
+      "location": "차드",
+      "total_cases": 0.007216,
+      "id": 148
+   },
+   {
+      "location": "칠레",
+      "total_cases": 2.466098,
+      "id": 152
+   },
+   {
+      "location": "중국",
+      "total_cases": 0.106663,
+      "id": 156
+   },
+   {
+      "location": "콜롬비아",
+      "total_cases": 5.994301,
+      "id": 170
+   },
+   {
+      "location": "콩고 공화국",
+      "total_cases": 0.023854,
+      "id": 178
+   },
+   {
+      "location": "코스타 리카",
+      "total_cases": 0.745949,
+      "id": 188
+   },
+   {
+      "location": "코트디부아르",
+      "total_cases": 0.081005,
+      "id": 384
+   },
+   {
+      "location": "크로아티아",
+      "total_cases": 0.998463,
+      "id": 191
+   },
+   {
+      "location": "쿠바",
+      "total_cases": 1.056846,
+      "id": 192
+   },
+   {
+      "location": "키프로스",
+      "total_cases": 0.280643,
+      "id": 196
+   },
+   {
+      "location": "체코",
+      "total_cases": 3.311152,
+      "id": 203
+   },
+   {
+      "location": "콩고 민주 공화국",
+      "total_cases": 0.085708,
+      "id": 180
+   },
+   {
+      "location": "덴마크",
+      "total_cases": 2.142809,
+      "id": 208
+   },
+   {
+      "location": "지부티",
+      "total_cases": 0.015527,
+      "id": 262
+   },
+   {
+      "location": "도미니카 공화국",
+      "total_cases": 0.565862,
+      "id": 214
+   },
+   {
+      "location": "에콰도르",
+      "total_cases": 0.769149,
+      "id": 218
+   },
+   {
+      "location": "이집트",
+      "total_cases": 0.446308,
+      "id": 818
+   },
+   {
+      "location": "엘살바도르",
+      "total_cases": 0.135109,
+      "id": 222
+   },
+   {
+      "location": "적도 기니",
+      "total_cases": 0.01585,
+      "id": 226
+   },
+   {
+      "location": "에리트레아",
+      "total_cases": 0.009652,
+      "id": 232
+   },
+   {
+      "location": "에스토니아",
+      "total_cases": 0.398519,
+      "id": 233
+   },
+   {
+      "location": "에스와티니",
+      "total_cases": 0.068702,
+      "id": 748
+   },
+   {
+      "location": "에티오피아",
+      "total_cases": 0.467001,
+      "id": 231
+   },
+   {
+      "location": "포클랜드 제도",
+      "total_cases": 0.000091,
+      "id": 238
+   },
+   {
+      "location": "피지",
+      "total_cases": 0.063398,
+      "id": 242
+   },
+   {
+      "location": "핀란드",
+      "total_cases": 0.546782,
+      "id": 246
+   },
+   {
+      "location": "프랑스",
+      "total_cases": 21.091589,
+      "id": 250
+   },
+   {
+      "location": "가봉",
+      "total_cases": 0.047399,
+      "id": 266
+   },
+   {
+      "location": "감비아",
+      "total_cases": 0.011911,
+      "id": 270
+   },
+   {
+      "location": "조지아",
+      "total_cases": 1.375615,
+      "id": 268
+   },
+   {
+      "location": "독일",
+      "total_cases": 11.832331,
+      "id": 276
+   },
+   {
+      "location": "가나",
+      "total_cases": 0.157751,
+      "id": 288
+   },
+   {
+      "location": "그리스",
+      "total_cases": 2.109999,
+      "id": 300
+   },
+   {
+      "location": "그린란드",
+      "total_cases": 0.0113,
+      "id": 304
+   },
+   {
+      "location": "과테말라",
+      "total_cases": 0.720802,
+      "id": 320
+   },
+   {
+      "location": "기니",
+      "total_cases": 0.036297,
+      "id": 324
+   },
+   {
+      "location": "기니비사우",
+      "total_cases": 0.007813,
+      "id": 624
+   },
+   {
+      "location": "가이아나",
+      "total_cases": 0.061901,
+      "id": 328
+   },
+   {
+      "location": "아이티",
+      "total_cases": 0.029888,
+      "id": 332
+   },
+   {
+      "location": "온두라스",
+      "total_cases": 0.391874,
+      "id": 340
+   },
+   {
+      "location": "헝가리",
+      "total_cases": 1.671547,
+      "id": 348
+   },
+   {
+      "location": "아이슬란드",
+      "total_cases": 0.081981,
+      "id": 352
+   },
+   {
+      "location": "인도",
+      "total_cases": 42.47806,
+      "id": 356
+   },
+   {
+      "location": "인도네시아",
+      "total_cases": 4.580093,
+      "id": 360
+   },
+   {
+      "location": "이란",
+      "total_cases": 6.696927,
+      "id": 364
+   },
+   {
+      "location": "이라크",
+      "total_cases": 2.263525,
+      "id": 368
+   },
+   {
+      "location": "아일랜드",
+      "total_cases": 1.230539,
+      "id": 372
+   },
+   {
+      "location": "이스라엘",
+      "total_cases": 3.316228,
+      "id": 376
+   },
+   {
+      "location": "이탈리아",
+      "total_cases": 11.847436,
+      "id": 380
+   },
+   {
+      "location": "자메이카",
+      "total_cases": 0.126437,
+      "id": 388
+   },
+   {
+      "location": "일본",
+      "total_cases": 3.576261,
+      "id": 392
+   },
+   {
+      "location": "요르단",
+      "total_cases": 1.39643,
+      "id": 400
+   },
+   {
+      "location": "카자흐스탄",
+      "total_cases": 1.370466,
+      "id": 398
+   },
+   {
+      "location": "케냐",
+      "total_cases": 0.322274,
+      "id": 404
+   },
+   {
+      "location": "쿠웨이트",
+      "total_cases": 0.590565,
+      "id": 414
+   },
+   {
+      "location": "키르기스스탄",
+      "total_cases": 0.199714,
+      "id": 417
+   },
+   {
+      "location": "라오스",
+      "total_cases": 0.137557,
+      "id": 418
+   },
+   {
+      "location": "라트비아",
+      "total_cases": 0.47673,
+      "id": 428
+   },
+   {
+      "location": "레바논",
+      "total_cases": 0.993095,
+      "id": 422
+   },
+   {
+      "location": "레소토",
+      "total_cases": 0.03235,
+      "id": 426
+   },
+   {
+      "location": "라이베리아",
+      "total_cases": 0.007346,
+      "id": 430
+   },
+   {
+      "location": "리비아",
+      "total_cases": 0.459548,
+      "id": 434
+   },
+   {
+      "location": "리투아니아",
+      "total_cases": 0.776794,
+      "id": 440
+   },
+   {
+      "location": "룩셈부르크",
+      "total_cases": 0.171452,
+      "id": 442
+   },
+   {
+      "location": "마다가스카르",
+      "total_cases": 0.061434,
+      "id": 450
+   },
+   {
+      "location": "말라위",
+      "total_cases": 0.084915,
+      "id": 454
+   },
+   {
+      "location": "말레이시아",
+      "total_cases": 2.956332,
+      "id": 458
+   },
+   {
+      "location": "말리",
+      "total_cases": 0.030236,
+      "id": 466
+   },
+   {
+      "location": "모리타니",
+      "total_cases": 0.058527,
+      "id": 478
+   },
+   {
+      "location": "멕시코",
+      "total_cases": 5.192008,
+      "id": 484
+   },
+   {
+      "location": "몰도바",
+      "total_cases": 0.474548,
+      "id": 498
+   },
+   {
+      "location": "몽골",
+      "total_cases": 0.863372,
+      "id": 496
+   },
+   {
+      "location": "몬테네그로",
+      "total_cases": 0.224793,
+      "id": 499
+   },
+   {
+      "location": "모로코",
+      "total_cases": 1.151081,
+      "id": 504
+   },
+   {
+      "location": "모잠비크",
+      "total_cases": 0.224494,
+      "id": 508
+   },
+   {
+      "location": "미얀마",
+      "total_cases": 0.540597,
+      "id": 104
+   },
+   {
+      "location": "나미비아",
+      "total_cases": 0.156519,
+      "id": 516
+   },
+   {
+      "location": "네팔",
+      "total_cases": 0.970462,
+      "id": 524
+   },
+   {
+      "location": "네덜란드",
+      "total_cases": 5.446024,
+      "id": 528
+   },
+   {
+      "location": "누벨칼레도니",
+      "total_cases": 0.032895,
+      "id": 540
+   },
+   {
+      "location": "뉴질랜드",
+      "total_cases": 0.018837,
+      "id": 554
+   },
+   {
+      "location": "니카라과",
+      "total_cases": 0.017791,
+      "id": 558
+   },
+   {
+      "location": "니제르",
+      "total_cases": 0.0087,
+      "id": 562
+   },
+   {
+      "location": "나이지리아",
+      "total_cases": 0.253875,
+      "id": 566
+   },
+   {
+      "location": "북마케도니아",
+      "total_cases": 0.282147,
+      "id": 807
+   },
+   {
+      "location": "노르웨이",
+      "total_cases": 0.962407,
+      "id": 578
+   },
+   {
+      "location": "오만",
+      "total_cases": 0.359256,
+      "id": 512
+   },
+   {
+      "location": "파키스탄",
+      "total_cases": 1.474075,
+      "id": 586
+   },
+   {
+      "location": "팔레스타인",
+      "total_cases": 0.594037,
+      "id": 275
+   },
+   {
+      "location": "파나마",
+      "total_cases": 0.735235,
+      "id": 591
+   },
+   {
+      "location": "파푸아뉴기니",
+      "total_cases": 0.037983,
+      "id": 598
+   },
+   {
+      "location": "파라과이",
+      "total_cases": 0.615911,
+      "id": 600
+   },
+   {
+      "location": "페루",
+      "total_cases": 3.397637,
+      "id": 604
+   },
+   {
+      "location": "필리핀",
+      "total_cases": 3.623176,
+      "id": 608
+   },
+   {
+      "location": "폴란드",
+      "total_cases": 5.258785,
+      "id": 616
+   },
+   {
+      "location": "포르투갈",
+      "total_cases": 2.99777,
+      "id": 620
+   },
+   {
+      "location": "카타르",
+      "total_cases": 0.348141,
+      "id": 634
+   },
+   {
+      "location": "루마니아",
+      "total_cases": 2.482394,
+      "id": 642
+   },
+   {
+      "location": "러시아",
+      "total_cases": 13.128679,
+      "id": 643
+   },
+   {
+      "location": "르완다",
+      "total_cases": 0.12921,
+      "id": 646
+   },
+   {
+      "location": "사우디아라비아",
+      "total_cases": 0.719136,
+      "id": 682
+   },
+   {
+      "location": "세네갈",
+      "total_cases": 0.085282,
+      "id": 686
+   },
+   {
+      "location": "세르비아",
+      "total_cases": 1.806086,
+      "id": 688
+   },
+   {
+      "location": "시에라리온",
+      "total_cases": 0.007638,
+      "id": 694
+   },
+   {
+      "location": "슬로바키아",
+      "total_cases": 1.765914,
+      "id": 703
+   },
+   {
+      "location": "슬로베니아",
+      "total_cases": 0.816299,
+      "id": 705
+   },
+   {
+      "location": "솔로몬 제도",
+      "total_cases": 0.003795,
+      "id": 90
+   },
+   {
+      "location": "소말리아",
+      "total_cases": 0.026203,
+      "id": 706
+   },
+   {
+      "location": "남아프리카 공화국",
+      "total_cases": 3.631642,
+      "id": 710
+   },
+   {
+      "location": "대한민국",
+      "total_cases": 1.185361,
+      "id": 410
+   },
+   {
+      "location": "남수단",
+      "total_cases": 0.016873,
+      "id": 728
+   },
+   {
+      "location": "스페인",
+      "total_cases": 10.502141,
+      "id": 724
+   },
+   {
+      "location": "스리랑카",
+      "total_cases": 0.623248,
+      "id": 144
+   },
+   {
+      "location": "수단",
+      "total_cases": 0.059345,
+      "id": 729
+   },
+   {
+      "location": "수리남",
+      "total_cases": 0.076498,
+      "id": 740
+   },
+   {
+      "location": "스웨덴",
+      "total_cases": 2.372637,
+      "id": 752
+   },
+   {
+      "location": "스위스",
+      "total_cases": 2.489172,
+      "id": 756
+   },
+   {
+      "location": "시리아",
+      "total_cases": 0.052243,
+      "id": 760
+   },
+   {
+      "location": "대만",
+      "total_cases": 0.019293,
+      "id": 158
+   },
+   {
+      "location": "타지키스탄",
+      "total_cases": 0.017753,
+      "id": 762
+   },
+   {
+      "location": "탄자니아",
+      "total_cases": 0.033436,
+      "id": 834
+   },
+   {
+      "location": "태국",
+      "total_cases": 2.545873,
+      "id": 764
+   },
+   {
+      "location": "티모르",
+      "total_cases": 0.020942,
+      "id": 626
+   },
+   {
+      "location": "토고",
+      "total_cases": 0.036612,
+      "id": 768
+   },
+   {
+      "location": "트리니다드 토바고",
+      "total_cases": 0.117525,
+      "id": 780
+   },
+   {
+      "location": "튀니지",
+      "total_cases": 0.954726,
+      "id": 788
+   },
+   {
+      "location": "터키",
+      "total_cases": 12.554674,
+      "id": 792
+   },
+   {
+      "location": "우간다",
+      "total_cases": 0.16251,
+      "id": 800
+   },
+   {
+      "location": "우크라이나",
+      "total_cases": 4.582137,
+      "id": 804
+   },
+   {
+      "location": "아랍에미리트",
+      "total_cases": 0.862514,
+      "id": 784
+   },
+   {
+      "location": "영국",
+      "total_cases": 18.045697,
+      "id": 826
+   },
+   {
+      "location": "미국",
+      "total_cases": 77.267254,
+      "id": 840
+   },
+   {
+      "location": "우루과이",
+      "total_cases": 0.749554,
+      "id": 858
+   },
+   {
+      "location": "우즈베키스탄",
+      "total_cases": 0.231179,
+      "id": 860
+   },
+   {
+      "location": "바누아투",
+      "total_cases": 0.000007,
+      "id": 548
+   },
+   {
+      "location": "베네수엘라",
+      "total_cases": 0.499537,
+      "id": 862
+   },
+   {
+      "location": "베트남",
+      "total_cases": 2.404651,
+      "id": 704
+   },
+   {
+      "location": "예멘",
+      "total_cases": 0.011579,
+      "id": 887
+   },
+   {
+      "location": "잠비아",
+      "total_cases": 0.30805,
+      "id": 894
+   },
+   {
+      "location": "짐바브웨",
+      "total_cases": 0.23074,
+      "id": 716
+   }
+]
