@@ -21,9 +21,11 @@ p {
    scroll-snap-type: y mandatory;
    scroll-snap-stop: always;
 }
+
 .snapPoint {
    scroll-snap-align: start;
 }
+
 .container {
    position: relative;
    width: 100%;
