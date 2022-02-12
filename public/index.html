@@ -38,7 +38,10 @@
 
    <body>
       <main id="root">
-         <article class="container landing-container">
+         <article
+            id="landing-container"
+            class="snapPoint container landing-container"
+         >
             <h1 class="landing-title">
                <img
                   src="./assets/images/landing-title-first.png"
@@ -56,7 +59,7 @@
             />
          </article>
 
-         <article class="container map-container" id="map-container">
+         <article id="map-container" class="snapPoint container map-container">
             <section class="sticky">
                <div id="map"></div>
             </section>
@@ -112,7 +115,10 @@
             </section>
          </article>
 
-         <article id="nations-container" class="container nations-container">
+         <article
+            id="nations-container"
+            class="snapPoint container nations-container"
+         >
             <svg id="nations" width="100%" height="100%"></svg>
             <section id="countryTooltip" class="tootip-container">
                <div class="title"></div>
@@ -136,7 +142,10 @@
             </section>
          </article>
 
-         <article class="container graph-container">
+         <article
+            id="graph-container"
+            class="snapPoint container graph-container"
+         >
             <section>
                <select id="selectButton">
                   <option value="perDay">전체 일별</option>

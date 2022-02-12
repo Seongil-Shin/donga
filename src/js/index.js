@@ -49,3 +49,67 @@ function calcTooltlpLeft(origin) {
    }
    return tooltipLeft;
 }
+
+// 스크롤 이벤트 등록
+// scroll element by section
+var lastScrollTop = 0;
+var canTriggerScrollToSection = [
+   [true, true, true, true],
+   [true, true, true, true],
+];
+var scrollToSectionObj = [
+   [
+      { to: "map-container", heightFrom: 0, heightTo: 1 },
+      { to: "nations-container", heightFrom: 5, heightTo: 6 },
+      { to: "graph-container", heightFrom: 6, heightTo: 7 },
+   ],
+   [
+      { to: "landing-container", heightFrom: 0, heightTo: 1 },
+      { to: "map-container", heightFrom: 5, heightTo: 6 },
+      { to: "nations-container", heightFrom: 6, heightTo: 7 },
+   ],
+];
+function scrollToSection(section) {
+   var sectionTop = document.getElementById(section).offsetTop;
+   root.scrollTo({
+      top: sectionTop,
+      behavior: "smooth",
+   });
+}
+function initCanTriggerScrollToSection() {
+   canTriggerScrollToSection = [
+      [true, true, true, true],
+      [true, true, true, true],
+   ];
+}
+function scrollEvent(e) {
+   var scrollTop = e.target.scrollTop;
+   if (scrollTop > lastScrollTop) {
+      scrollToSectionObj[0].forEach((item, idx) => {
+         if (
+            scrollTop > window.innerHeight * item.heightFrom &&
+            scrollTop < item.heightTo * window.innerHeight &&
+            canTriggerScrollToSection[0][idx]
+         ) {
+            scrollToSection(item.to);
+            initCanTriggerScrollToSection();
+            canTriggerScrollToSection[0][idx] = false;
+         }
+      });
+   } else {
+      scrollToSectionObj[1].forEach((item, idx) => {
+         if (
+            scrollTop > window.innerHeight * item.heightFrom &&
+            scrollTop < item.heightTo * window.innerHeight &&
+            canTriggerScrollToSection[1][idx]
+         ) {
+            scrollToSection(item.to);
+            initCanTriggerScrollToSection();
+            canTriggerScrollToSection[1][idx] = false;
+         }
+      });
+   }
+   lastScrollTop = scrollTop;
+}
+
+var root = document.getElementById("root");

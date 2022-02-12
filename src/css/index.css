@@ -5,23 +5,28 @@ html {
 body {
    padding: 0;
    margin: 0;
+
    font-family: "Nanum Gothic", sans-serif;
 }
 
 p {
    margin: 0px;
 }
+
 #root {
+   position: relative;
    width: 100vw;
    height: 100vh;
    overflow-x: hidden;
    overflow-y: scroll;
-   scroll-snap-type: y proximity;
+
+   scroll-snap-type: y mandatory;
+   scroll-snap-stop: always;
 }
-
-.container {
+.snapPoint {
    scroll-snap-align: start;
-
+}
+.container {
    position: relative;
    width: 100%;
    text-align: center;
