@@ -26,6 +26,9 @@ p {
 .snapPoint {
    scroll-snap-align: start;
 }
+.snapPoint-end {
+   scroll-snap-align: end !important;
+}
 .container {
    position: relative;
    width: 100%;

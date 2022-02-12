@@ -87,17 +87,13 @@ var mapLocation = [
    { zoom: 14, latLng: incheonMedicalCenterLatLng, marker: true },
 ];
 
-var mapContainer = document.getElementById("map-container");
-function setMapContainerScrollSnapAlign(value) {
-   mapContainer.setAttribute("style", `scroll-snap-align: ${value};`);
-}
-
 function handleScrollEvent(e) {
    var scrollTop = e.target.scrollTop;
    var wHeight = window.innerHeight;
 
    if (scrollTop < wHeight) {
-      setMapContainerScrollSnapAlign("start");
+      canTrigger = canTrigger.map((v) => true);
+      map.setZoom(8);
    } else if (scrollTop >= wHeight && scrollTop < wHeight * 6) {
       for (let i = 0; i < 4; i++) {
          if (
@@ -122,7 +118,7 @@ function handleScrollEvent(e) {
       setMapContainerScrollSnapAlign("end");
    } else {
       canTrigger = canTrigger.map((v) => true);
-      map.setZoom(8);
+      map.setZoom(13);
    }
 }
 
