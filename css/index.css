@@ -8,6 +8,9 @@ body {
    font-family: "Nanum Gothic", sans-serif;
 }
 
+p {
+   margin: 0px;
+}
 #root {
    width: 100vw;
    height: 100vh;
@@ -41,7 +44,9 @@ body {
 .slide {
    pointer-events: auto;
    position: absolute;
+   top: 10px;
    left: 50%;
+   width: 90%; /* 반응형 조절*/
 
    transform: translateX(-50%);
    padding: 1rem;
@@ -55,16 +60,12 @@ body {
    slide-container로 감싸줄 필요없음.
 */
 .fixed-slide {
-   top: 10px;
-   width: 50%; /* 반응형 조절*/
 }
 
 /* 스크롤에 따라 위로 올라가는 slide.
    slide-container로 감싸줘야함.
 */
 .movable-slide {
-   top: 0;
-   width: 30%; /* 반응형 조절*/
    filter: drop-shadow(0 10px 8px rgb(0 0 0 / 0.04))
       drop-shadow(0 4px 3px rgb(0 0 0 / 0.1));
 }
@@ -76,6 +77,7 @@ body {
 .tootip-container {
    position: absolute;
    opacity: 0;
+   width: 250px;
    pointer-events: none;
    background: rgba(67, 73, 83, 0.8);
    padding: 1rem;
@@ -91,4 +93,40 @@ body {
    font-size: 1.2rem;
    font-weight: bold;
    margin-bottom: 0.5rem;
+}
+
+/* 랜딩 페이지 스타일 */
+
+/* 지도 페이지 스타일 */
+
+/* 지구본 페이지 스타일 */
+
+/* 그래프 페이지 스타일 */
+
+/* 반응형 조절 */
+@media screen and (min-width: 768px) {
+   p {
+      margin: 5px 0px;
+   }
+   .slide {
+      width: 80%;
+   }
+}
+@media screen and (min-width: 1024px) {
+   .slide {
+      width: 60%;
+   }
+}
+@media screen and (min-width: 1280px) {
+   p {
+      margin: 10px 0px;
+   }
+   .slide {
+      width: 50%;
+   }
+}
+@media screen and (min-width: 1546px) {
+   .slide {
+      width: 40%;
+   }
 }

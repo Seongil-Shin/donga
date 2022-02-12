@@ -1,5 +1,14 @@
 var margin = { top: 10, right: 30, bottom: 50, left: 60 };
-var casesGraphWidth = window.innerWidth / 2,
+var casesGraphWidth = returnVariableByWidth([
+      window.innerWidth - 100,
+      window.innerWidth - 100,
+      window.innerWidth - 150,
+      window.innerWidth - 250,
+      window.innerWidth - 300,
+      window.innerWidth - 400,
+      window.innerWidth - 600,
+      window.innerWidth - 800,
+   ]),
    casesGraphHeight = window.innerHeight / 2; // 반응형 조절
 
 // svg의 너비, 높이 설정하고, g를 붙인 다음 위치를 조정해줌.
@@ -35,7 +44,7 @@ var graphAbsoluteOffset = {
 // 옵션 버튼
 var selectButton = d3
    .select("#selectButton")
-   .style("left", graphAbsoluteOffset.left + "px")
+   .style("left", graphAbsoluteOffset.left + 10 + "px")
    .style("top", graphAbsoluteOffset.top + "px");
 
 var casesKoreaPerDay; // 일별 확진자 데이터
@@ -134,23 +143,15 @@ d3.csv(
       // Add the brushing
       graph_line.append("g").attr("class", "brush").call(graph_brush);
 
-      // A function that set idleTimeOut to null
-      var idleTimeout;
-      function idled() {
-         idleTimeout = null;
-      }
-
       // A function that update the chart for given boundaries
       function updateChart() {
          // What are the selected boundaries?
          extent = d3.event.selection;
-
          // If no selection, back to initial coordinate. Otherwise, update X axis domain
-         if (!extent) {
-            if (!idleTimeout) return (idleTimeout = setTimeout(idled, 350)); // This allows to wait a little bit
-            graph_x.domain([4, 8]);
-            updateXAxis(4, 8);
+         if (!extent || extent[1] - extent[0] <= 0) {
+            return;
          } else {
+            mouseout();
             updateXAxis(graph_x.invert(extent[0]), graph_x.invert(extent[1]));
             graph_line.select(".brush").call(graph_brush.move, null); // This remove the grey brush area as soon as the selection has been done
          }
@@ -159,15 +160,14 @@ d3.csv(
       }
 
       // 더블클릭되었을때 초기화.
-      caseGraphSvg.on("dblclick", function () {
-         updateXAxis();
-         updateLine(false);
-      });
+      caseGraphSvg.on("dblclick", initGraph);
 
-      // 마우스가 그래프 위에 있을때, 가장 가까운 x를 찾아줌
-      var bisect = d3.bisector(function (d) {
-         return d.date;
-      }).left;
+      // 터치 이벤트 처리
+      graph_line.select(".overlay").on("touchstart", function () {
+         mouseover();
+         mousemove();
+         doubletap();
+      });
 
       // hover 시, 그래프에 찍을 점
       var point = caseGraphSvg
@@ -184,16 +184,23 @@ d3.csv(
       var caseGraphTooltipPrefix = caseGraphTooltipContainer.select(".prefix");
       var caseGraphTooltipContent = caseGraphTooltipContainer.select(".cases");
 
+      // 데이터와 x좌표를 받고, 가장 가까운 인덱스를 찾아줌
+      var bisect = d3.bisector(function (d) {
+         return d.date;
+      }).left;
+
       //마우스 움직임 처리 함수들
       function mouseover() {
          point.style("opacity", 1);
          caseGraphTooltipContainer.style("opacity", 1);
       }
+
       function mousemove() {
          // recover coordinate we need
-         var x0 = graph_x.invert(d3.mouse(this)[0]);
+         var x0 = graph_x.invert(d3.mouse(d3.event.currentTarget)[0]);
          var i = bisect(currentData, x0, 1);
          selectedData = currentData[i];
+
          point
             .attr("cx", graph_x(selectedData.date))
             .attr("cy", graph_y(selectedData.value));
@@ -201,17 +208,17 @@ d3.csv(
             selectedData.date.toISOString().slice(0, 10)
          );
          caseGraphTooltipContent.text(numberWithCommas(selectedData.value));
-
          caseGraphTooltipContainer
             .style(
                "left",
-               graphAbsoluteOffset.left + graph_x(selectedData.date) + "px"
+               calcTooltlpLeft(
+                  graphAbsoluteOffset.left + graph_x(selectedData.date)
+               ) + "px"
             )
             .style(
                "top",
-               graphAbsoluteOffset.top + graph_y(selectedData.value) + "px"
-            )
-            .style("transform", `translate(-55%, -110%)`);
+               graphAbsoluteOffset.top + graph_y(selectedData.value) + 7 + "px"
+            );
       }
       function mouseout() {
          point.style("opacity", 0);
@@ -305,4 +312,21 @@ function updateLine(doDatum) {
                })
          );
    }
+}
+
+function initGraph() {
+   updateXAxis();
+   updateLine(false);
+}
+
+var mylatesttap;
+function doubletap() {
+   var now = new Date().getTime();
+   var timesince = now - mylatesttap;
+   if (timesince < 400 && timesince > 0) {
+      // double tap
+      initGraph();
+   }
+
+   mylatesttap = new Date().getTime();
 }

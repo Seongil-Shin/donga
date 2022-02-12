@@ -25,7 +25,8 @@
    stroke-width: 0.7px;
 }
 
-.land-selected:hover {
+.land-selected:hover,
+.land-selected-fill {
    fill: #ff6f6e;
    stroke-width: 1px;
 }

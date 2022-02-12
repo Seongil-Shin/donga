@@ -8,14 +8,13 @@
 .landing-title {
    position: absolute;
    margin: 0;
-   width: 60%; /* 반응형 조절 */
    top: 50%;
    left: 50%;
-   transform: translate(-50%, -87%);
+   transform: translate(-50%, -80%);
 
-   font-weight: bold;
-   letter-spacing: -0.005em;
+   width: 100%;
 }
+
 .landing-title-img {
    width: 100%;
 }
@@ -30,6 +29,7 @@
 
    animation: bounce 1s infinite;
 }
+
 @keyframes bounce {
    0%,
    100% {
@@ -39,5 +39,21 @@
    50% {
       transform: translate(-50%, 0);
       animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+   }
+}
+
+@media screen and (min-width: 768px) {
+   .landing-title {
+      width: 70%;
+   }
+}
+@media screen and (min-width: 1280px) {
+   .landing-title {
+      width: 60%;
+   }
+}
+@media screen and (min-width: 1546px) {
+   .landing-title {
+      width: 50%;
    }
 }
