@@ -1,5 +1,11 @@
 .map-container {
-   height: 500vh;
+   height: 100vh;
+   overflow-y: scroll;
+   -ms-overflow-style: none; /* IE and Edge */
+   scrollbar-width: none; /* Firefox */
+}
+.map-container::-webkit-scrollbar {
+   display: none; /* Chrome, Safari, Opera*/
 }
 
 #map {

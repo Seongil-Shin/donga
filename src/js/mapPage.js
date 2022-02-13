@@ -33,37 +33,59 @@ var mapLocation = [
    { zoom: 14, latLng: incheonMedicalCenterLatLng, marker: true },
 ];
 
+const mapContainer = document.getElementById("map-container");
+var reachLastSlide = false,
+   reachFirstSlide = true;
+
 function handleScrollEvent(e) {
    var scrollTop = e.target.scrollTop;
    var wHeight = window.innerHeight;
 
-   if (scrollTop < wHeight) {
-      canTrigger = canTrigger.map((v) => true);
-      map.setZoom(8);
-   } else if (scrollTop >= wHeight && scrollTop < wHeight * 6) {
-      for (let i = 0; i < 4; i++) {
-         if (
-            scrollTop >= (i + 1) * wHeight + wHeight * 0.2 &&
-            scrollTop <= (i + 1) * wHeight + wHeight * 0.8 &&
-            window.canTrigger[i]
-         ) {
-            map.setZoom(mapLocation[i].zoom - 1);
-            map.panTo(mapLocation[i].latLng);
-            setTimeout(() => map.setZoom(mapLocation[i].zoom), 500);
+   for (let i = 0; i < 4; i++) {
+      if (
+         scrollTop >= i * wHeight + wHeight * 0.2 &&
+         scrollTop <= i * wHeight + wHeight * 0.8 &&
+         window.canTrigger[i]
+      ) {
+         map.setZoom(mapLocation[i].zoom - 1);
+         map.panTo(mapLocation[i].latLng);
+         setTimeout(() => map.setZoom(mapLocation[i].zoom), 500);
 
-            marker.setVisible(false);
-            marker = new google.maps.Marker({
-               position: mapLocation[i].latLng,
-               map: map,
-            });
+         marker.setVisible(false);
+         marker = new google.maps.Marker({
+            position: mapLocation[i].latLng,
+            map: map,
+         });
 
-            canTrigger = canTrigger.map((v, idx) => (idx === i ? false : true));
+         canTrigger = canTrigger.map((v, idx) => (idx === i ? false : true));
+
+         if (i === 3) {
+            reachLastSlide = true;
+            reachFirstSlide = false;
+         } else if (i === 0) {
+            reachFirstSlide = true;
+            reachLastSlide = false;
          }
       }
-   } else {
-      canTrigger = canTrigger.map((v) => true);
-      map.setZoom(13);
    }
 }
+mapContainer.addEventListener("scroll", handleScrollEvent);
+
 var root = document.getElementById("root");
-root.addEventListener("scroll", handleScrollEvent);
+root.addEventListener("scroll", handleScrollForMap);
+
+function handleScrollForMap(event) {
+   if (event.target.scrollTop > mapContainer.offsetTop && !reachLastSlide) {
+      mapContainer.scrollBy(0, event.target.scrollTop - mapContainer.offsetTop);
+      root.scrollTo({ top: mapContainer.offsetTop });
+   } else if (
+      event.target.scrollTop < mapContainer.offsetTop &&
+      !reachFirstSlide
+   ) {
+      mapContainer.scrollBy(
+         0,
+         -(mapContainer.offsetTop - event.target.scrollTop)
+      );
+      root.scrollTo({ top: mapContainer.offsetTop });
+   }
+}
