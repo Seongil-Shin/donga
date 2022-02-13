@@ -15,12 +15,12 @@
    top: 0;
    left: 0;
    width: 1000rem;
-   height: 100vh;
+   height: calc(var(--vh, 1vh) * 100);
 }
 .prevent-images {
    position: absolute;
    top: 0;
-   height: 100vh;
+   height: calc(var(--vh, 1vh) * 100);
    left: 30vw;
    width: 130rem;
 }

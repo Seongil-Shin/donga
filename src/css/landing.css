@@ -1,5 +1,5 @@
 .landing-container {
-   height: 100vh;
+   height: calc(var(--vh, 1vh) * 100);
 
    background-image: url("../assets/images/first_bg_low.png");
    background-size: cover;

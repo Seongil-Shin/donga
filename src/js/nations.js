@@ -68,27 +68,14 @@ function ready(values) {
          (item) => countryById[item.id] !== undefined
       );
 
+   //Drawing countries on the globe
+
+   // 데이터가 존재하는 국가 렌더
+   var prevTouchedIdx = 10;
    var countriesSelected = topojson.feature(
       values[0],
       values[0].objects.countries
    ).features;
-   var countriesUnselected = topojson.feature(
-      countriesUnselectedValues,
-      countriesUnselectedValues.objects.countries
-   ).features;
-
-   //Drawing countries on the globe
-   // 데이터가 없는 국가 렌더
-   globeGroup
-      .selectAll("path.land")
-      .data(countriesUnselected)
-      .enter()
-      .append("path")
-      .attr("class", "land")
-      .attr("d", nationsPath);
-
-   // 데이터가 존재하는 국가 렌더
-   var prevTouchedIdx = 10;
    globeGroup
       .selectAll("path.land")
       .data(countriesSelected)
@@ -118,6 +105,20 @@ function ready(values) {
          prevTouchedIdx = touchedIdx;
          showNationsTooltip(d);
       });
+
+   // 데이터가 없는 국가 렌더
+   var countriesUnselected = topojson.feature(
+      countriesUnselectedValues,
+      countriesUnselectedValues.objects.countries
+   ).features;
+
+   globeGroup
+      .selectAll("path.land")
+      .data(countriesUnselected)
+      .enter()
+      .append("path")
+      .attr("class", "land")
+      .attr("d", nationsPath);
 
    //Drag event
    globeGroup.call(
