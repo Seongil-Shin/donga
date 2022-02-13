@@ -31,7 +31,7 @@
       <link rel="preconnect" href="https://fonts.googleapis.com" />
       <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
       <link
-         href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700&display=swap"
+         href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap"
          rel="stylesheet"
       />
    </head>
@@ -40,13 +40,13 @@
       <main id="root">
          <article
             id="landing-container"
-            class="snapPoint container landing-container"
+            class="container landing-container snapPoint"
          >
             <h1 class="landing-title">
                <img
                   src="./assets/images/landing-title-first.png"
                   class="landing-title-img"
-               /><br />
+               />
                <img
                   src="./assets/images/landing-title-second.png"
                   class="landing-title-img"
@@ -59,7 +59,7 @@
             />
          </article>
 
-         <article id="map-container" class="snapPoint container map-container">
+         <article id="map-container" class="container map-container snapPoint">
             <section class="sticky">
                <div id="map"></div>
             </section>
@@ -117,7 +117,7 @@
 
          <article
             id="nations-container"
-            class="snapPoint container nations-container"
+            class="container nations-container snapPoint"
          >
             <svg id="nations" width="100%" height="100%"></svg>
             <section id="countryTooltip" class="tootip-container">
@@ -144,7 +144,7 @@
 
          <article
             id="graph-container"
-            class="snapPoint container graph-container"
+            class="container graph-container snapPoint"
          >
             <section>
                <select id="selectButton">
@@ -175,6 +175,48 @@
                </div>
             </section>
          </article>
+
+         <article
+            id="prevent-container"
+            class="container prevent-container snapPoint"
+         >
+            <div class="prevent-content">
+               <div class="prevent-elements">
+                  <div class="prevent-fixed"></div>
+                  <div class="prevent-images">
+                     <div class="prevent-image-house">
+                        <div>
+                           <b>집</b> <br /><br />
+                           외출하고 집에 돌아온 뒤에는 손을 씻어야 한다. 흐르는
+                           물에 비누로 30초 이상 손을 씻는 것이 좋다. 동거인이
+                           감기 증상을 보일 경우 식사를 따로 하고, 수건 등을
+                           같이 쓰지 않는 것이 좋다.
+                        </div>
+                     </div>
+                     <div class="prevent-image-bus">
+                        <div>
+                           <b>대중교통</b> <br /><br />
+                           대중교통이 붐비는 출퇴근 시간은 피하고, 가까운 거리를
+                           이동할 경우 걷는 것도 좋다. 대중교통을 이용한 뒤에는
+                           손소독제를 사용하면 좋다.
+                        </div>
+                     </div>
+                     <div class="prevent-image-school">
+                        <div>
+                           <b>학교</b> <br /><br />
+                           등교 전 건강상태를 확인한다. 발열 등 코로나19 의심
+                           증상이 있을 경우 등교하지 않는다. 교실에서는 상시
+                           마스크를 착용한다. 또한 교실을 수시로 환기하는 것이
+                           중요하다.
+                        </div>
+                     </div>
+                  </div>
+                  <div class="prevent-background prevent-scene"></div>
+                  <div class="prevent-background prevent-road"></div>
+               </div>
+            </div>
+         </article>
+         <article class="snapPoint"></article>
       </main>
 
       <script

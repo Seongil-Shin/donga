@@ -5,8 +5,7 @@ html {
 body {
    padding: 0;
    margin: 0;
-
-   font-family: "Nanum Gothic", sans-serif;
+   font-family: "Noto Sans KR", sans-serif;
 }
 
 p {
@@ -20,8 +19,7 @@ p {
    overflow-x: hidden;
    overflow-y: scroll;
 
-   scroll-snap-type: y mandatory;
-   scroll-snap-stop: always;
+   scroll-snap-type: y proximity;
 }
 .snapPoint {
    scroll-snap-align: start;

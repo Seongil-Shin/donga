@@ -125,12 +125,13 @@ function ready(values) {
          hideNationsTooltop();
          const rotate = projection.rotate();
          const k = sens / projection.scale();
-         projection.rotate([
-            rotate[0] + d3.event.dx * k,
-            rotate[1] - d3.event.dy * k,
-         ]);
-         nationsPath = d3.geoPath().projection(projection);
-         nationsSvg.selectAll("path").attr("d", nationsPath);
+
+         updateProjection(function () {
+            projection.rotate([
+               rotate[0] + d3.event.dx * k,
+               rotate[1] - d3.event.dy * k,
+            ]);
+         });
       })
    );
 }
@@ -146,4 +147,16 @@ function showNationsTooltip(data) {
 
 function hideNationsTooltop() {
    nationsCountryTooltip.style("opacity", 0);
+}
+function updateProjection(updateFunction) {
+   updateFunction();
+   nationsPath = d3.geoPath().projection(projection);
+   nationsSvg.selectAll("path").attr("d", nationsPath);
+}
+
+window.addEventListener("resize", nations_handleResize);
+function nations_handleResize() {
+   updateProjection(function () {
+      projection.translate([window.innerWidth / 2, window.innerHeight / 2]);
+   });
 }

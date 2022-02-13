@@ -330,3 +330,23 @@ function doubletap() {
 
    mylatesttap = new Date().getTime();
 }
+
+window.addEventListener("resize", graph_handleResize);
+function graph_handleResize() {
+   d3.select("#selectButton")
+      .style(
+         "left",
+         window.innerWidth / 2 -
+            (casesGraphWidth + margin.left + margin.right) / 2 +
+            margin.left +
+            10 +
+            "px"
+      )
+      .style(
+         "top",
+         window.innerHeight / 2 -
+            (casesGraphHeight + margin.top + margin.bottom) / 2 +
+            margin.top +
+            "px"
+      );
+}

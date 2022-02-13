@@ -5,12 +5,13 @@ html {
 body {
    padding: 0;
    margin: 0;
-   font-family: "Nanum Gothic", sans-serif;
+   font-family: "Noto Sans KR", sans-serif;
 }
 
 p {
    margin: 0px;
 }
+
 #root {
    position: relative;
    width: 100vw;
@@ -18,14 +19,14 @@ p {
    overflow-x: hidden;
    overflow-y: scroll;
 
-   scroll-snap-type: y mandatory;
-   scroll-snap-stop: always;
+   scroll-snap-type: y proximity;
 }
-
 .snapPoint {
    scroll-snap-align: start;
 }
-
+.snapPoint-end {
+   scroll-snap-align: end !important;
+}
 .container {
    position: relative;
    width: 100%;
@@ -120,6 +121,23 @@ p {
 
 .landing-title-img {
    width: 100%;
+   opacity: 0;
+}
+.landing-title-img:nth-child(1) {
+   animation: 1s ease-in-out forwards slidesin;
+}
+.landing-title-img:nth-child(2) {
+   animation: 1s ease-in-out 0.5s forwards slidesin;
+}
+@keyframes slidesin {
+   from {
+      opacity: 0;
+      transform: translate(0, 50%);
+   }
+   to {
+      opacity: 1;
+      transform: translate(0, 0%);
+   }
 }
 
 .chevron-down {
@@ -192,7 +210,7 @@ p {
 /* 그래프 페이지 스타일 */
 .graph-container {
    height: 100vh;
-   background-color: #5f656f;
+   background-color: #afafaf;
 }
 
 #casesGraph {
@@ -221,6 +239,149 @@ p {
    z-index: 100;
 }
 
+/* 예방 화면 스타일 */
+
+.prevent-container {
+   width: 100vw;
+   height: 130rem;
+   min-height: calc(30vw + 120rem);
+   background-color: #f9f9f9;
+}
+
+.prevent-content {
+   position: sticky;
+   top: 0;
+   left: 0;
+}
+.prevent-elements {
+   position: absolute;
+   top: 0;
+   left: 0;
+   width: 1000rem;
+   height: 100vh;
+}
+.prevent-images {
+   position: absolute;
+   top: 0;
+   height: 100vh;
+   left: 30vw;
+   width: 130rem;
+}
+
+.prevent-images > div {
+   box-sizing: border-box;
+   text-align: left;
+   font-size: 1rem;
+   background-clip: content-box;
+}
+
+.prevent-images > div > div {
+   opacity: 0;
+   transform: translate(0, -110%);
+
+   transition-property: opacity;
+   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+   transition-duration: 150ms;
+}
+.prevent-image-house {
+   position: absolute;
+   width: 26.25rem;
+   background: url("../assets/images/house.png") center bottom/100% auto
+      no-repeat;
+   z-index: 200;
+   left: 0px;
+   bottom: calc(35% + 5rem);
+   height: 11.875rem;
+}
+.prevent-image-bus {
+   position: absolute;
+   width: 16.875rem;
+   background: url("../assets/images/bus.png") center bottom/100% auto no-repeat;
+   z-index: 200;
+   left: 66.25rem;
+   height: 6.25rem;
+   bottom: calc(35% + 1.75rem);
+}
+.prevent-image-school {
+   position: absolute;
+   width: 20.625rem;
+   background: url("../assets/images/school.png") center bottom/100% auto
+      no-repeat;
+   z-index: 200;
+   left: 83.125rem;
+   bottom: calc(35% + 5rem);
+   height: 15rem;
+}
+.prevent-background {
+   position: absolute;
+   width: 100%;
+   z-index: 110;
+   left: 0;
+}
+.prevent-scene {
+   background: url("../assets/images/bg-scene.png") center bottom/auto 100%
+      repeat-x;
+   bottom: calc(35% + 4.5rem);
+   height: 20rem;
+   opacity: 0.3;
+}
+.prevent-road {
+   background: url("../assets/images/road.png") center bottom/auto 100% repeat-x;
+   bottom: calc(35%);
+   height: 4.5rem;
+}
+.prevent-show-text {
+   opacity: 1 !important;
+}
+
+.prevent-fixed {
+   visibility: hidden;
+   box-sizing: border-box;
+   position: fixed;
+   top: 10px;
+   left: 0;
+   width: 100vw;
+   padding: 0.5rem;
+   z-index: 300;
+
+   text-align: left;
+}
+
+@media screen and (max-height: 46rem) {
+   .prevent-image-house {
+      bottom: 7rem;
+   }
+   .prevent-image-bus {
+      bottom: 3.75rem;
+   }
+   .prevent-image-school {
+      bottom: 7rem;
+   }
+   .prevent-scene {
+      bottom: 7rem;
+   }
+   .prevent-road {
+      bottom: 2rem;
+   }
+}
+@media screen and (max-width: 30rem) {
+   .prevent-fixed {
+      visibility: visible;
+   }
+   .prevent-container {
+      height: 110rem;
+   }
+   .prevent-images {
+      left: 0;
+   }
+   .prevent-image-bus {
+      left: 46rem;
+   }
+   .prevent-image-school {
+      left: 63rem;
+   }
+}
+
 /* 반응형 조절 */
 @media screen and (min-width: 768px) {
    p {
@@ -245,7 +406,6 @@ p {
    .slide {
       width: 50%;
    }
-
    .landing-title {
       width: 60%;
    }

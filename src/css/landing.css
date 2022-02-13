@@ -17,6 +17,23 @@
 
 .landing-title-img {
    width: 100%;
+   opacity: 0;
+}
+.landing-title-img:nth-child(1) {
+   animation: 1s ease-in-out forwards slidesin;
+}
+.landing-title-img:nth-child(2) {
+   animation: 1s ease-in-out 0.5s forwards slidesin;
+}
+@keyframes slidesin {
+   from {
+      opacity: 0;
+      transform: translate(0, 50%);
+   }
+   to {
+      opacity: 1;
+      transform: translate(0, 0%);
+   }
 }
 
 .chevron-down {
