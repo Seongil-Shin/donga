@@ -304,10 +304,15 @@ var casesGraphWidth = returnVariableByWidth([
    casesGraphHeight = window.innerHeight / 2; // 반응형 조절
 
 // svg의 너비, 높이 설정하고, g를 붙인 다음 위치를 조정해줌.
+d3.select("div.casesGraph-position").attr(
+   "style",
+   `width:${casesGraphWidth + margin.left + margin.right}px; height:${
+      casesGraphHeight + margin.top + margin.bottom
+   }px;`
+);
+
 var caseGraphSvg = d3
    .select("svg#casesGraph")
-   .attr("width", casesGraphWidth + margin.left + margin.right)
-   .attr("height", casesGraphHeight + margin.top + margin.bottom)
    .append("g")
    .attr("transform", `translate(${margin.left}, ${margin.top + 2})`)
    .attr("class", "graphGroup");
@@ -334,10 +339,7 @@ var graphAbsoluteOffset = {
 };
 
 // 옵션 버튼
-var selectButton = d3
-   .select("#selectButton")
-   .style("left", graphAbsoluteOffset.left + 10 + "px")
-   .style("top", graphAbsoluteOffset.top + "px");
+var selectButton = d3.select("#selectButton");
 
 var casesKoreaPerDay; // 일별 확진자 데이터
 var casesKoreaAcc; // 누적 확진자 데이터
@@ -408,7 +410,6 @@ d3.csv(
       graph_line = caseGraphSvg
          .append("g")
          .attr("clip-path", "url(#clip)")
-         .on("mouseover", mouseover)
          .on("mousemove", mousemove)
          .on("mouseout", mouseout);
 
@@ -456,7 +457,6 @@ d3.csv(
 
       // 터치 이벤트 처리
       graph_line.select(".overlay").on("touchstart", function () {
-         mouseover();
          mousemove();
          doubletap();
       });
@@ -482,12 +482,10 @@ d3.csv(
       }).left;
 
       //마우스 움직임 처리 함수들
-      function mouseover() {
+      function mousemove() {
          point.style("opacity", 1);
          caseGraphTooltipContainer.style("opacity", 1);
-      }
 
-      function mousemove() {
          // recover coordinate we need
          var x0 = graph_x.invert(d3.mouse(d3.event.currentTarget)[0]);
          var i = bisect(currentData, x0, 1);
@@ -621,26 +619,6 @@ function doubletap() {
    }
 
    mylatesttap = new Date().getTime();
-}
-
-window.addEventListener("resize", graph_handleResize);
-function graph_handleResize() {
-   d3.select("#selectButton")
-      .style(
-         "left",
-         window.innerWidth / 2 -
-            (casesGraphWidth + margin.left + margin.right) / 2 +
-            margin.left +
-            10 +
-            "px"
-      )
-      .style(
-         "top",
-         window.innerHeight / 2 -
-            (casesGraphHeight + margin.top + margin.bottom) / 2 +
-            margin.top +
-            "px"
-      );
 }
 
 /* 예방 화면 자바스크립트*/

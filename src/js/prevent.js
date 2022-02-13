@@ -31,9 +31,11 @@ const preventImageElements = [
       중요하다.",
    },
 ];
+
 var pv_lastShowTextIdx = -1;
 var prevent_fixedTextEle = document.getElementsByClassName("prevent-fixed")[0];
 var prevent_scene = document.getElementsByClassName("prevent-scene")[0];
+
 function handlePreventScroll(e) {
    const curOffset = e.target.scrollTop - preventContainerOffsetT;
    if (curOffset > 0) {

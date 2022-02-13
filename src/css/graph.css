@@ -28,3 +28,18 @@
    position: absolute;
    z-index: 100;
 }
+
+.casesGraph-position {
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+}
+#casesGraph {
+   width: 100%;
+   height: 100%;
+}
+#selectButton {
+   top: 10px;
+   left: 70px;
+}

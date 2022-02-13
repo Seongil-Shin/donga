@@ -147,13 +147,15 @@
             class="container graph-container snapPoint"
          >
             <section>
-               <select id="selectButton">
-                  <option value="perDay">전체 일별</option>
-                  <option value="acc">전체 누적</option>
-                  <option value="month">최근 한달</option>
-                  <option value="week">최근 일주일</option>
-               </select>
-               <svg id="casesGraph"></svg>
+               <div class="casesGraph-position">
+                  <select id="selectButton">
+                     <option value="perDay">전체 일별</option>
+                     <option value="acc">전체 누적</option>
+                     <option value="month">최근 한달</option>
+                     <option value="week">최근 일주일</option>
+                  </select>
+                  <svg id="casesGraph"></svg>
+               </div>
                <div id="caseGraphTooltip" class="tootip-container">
                   <div class="title"></div>
                   <br />
