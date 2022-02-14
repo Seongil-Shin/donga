@@ -1,5 +1,7 @@
-var margin = { top: 10, right: 30, bottom: 50, left: 60 };
-var casesGraphWidth = returnVariableByWidth([
+// 그래프 마진
+const margin = { top: 10, right: 30, bottom: 50, left: 60 };
+// 반응형 조절
+const casesGraphWidth = returnVariableByWidth([
       window.innerWidth - 100,
       window.innerWidth - 100,
       window.innerWidth - 150,
@@ -9,14 +11,71 @@ var casesGraphWidth = returnVariableByWidth([
       window.innerWidth - 600,
       window.innerWidth - 800,
    ]),
-   casesGraphHeight = window.innerHeight / 2; // 반응형 조절
+   casesGraphHeight = window.innerHeight / 2;
+
+// 그래프 페이지 상단의 슬라이드 높이
+const graph_slideHeight =
+   document.querySelector("#graph-container > section.slide").clientHeight + 20;
+
+// height가 너무 작은 디바이스에서는 적절히 아래로 내림
+function getGraphTranslateYAmount() {
+   return (window.innerHeight - casesGraphHeight + margin.top + margin.bottom) /
+      2 <
+      nations_slideHeight
+      ? nations_slideHeight +
+           (casesGraphHeight + margin.top + margin.bottom) / 2
+      : window.innerHeight / 2;
+}
+
+// d3 언어설정
+d3.timeFormatDefaultLocale({
+   decimal: ".",
+   thousands: ",",
+   grouping: [3],
+   currency: ["$", ""],
+   dateTime: "%a %b %e %X %Y",
+   date: "%Y/%m/%d",
+   time: "%H:%M:%S",
+   periods: ["AM", "PM"],
+   days: ["일", "월", "화", "수", "목", "금", "토"],
+   shortDays: ["일", "월", "화", "수", "목", "금", "토"],
+   months: [
+      "1월",
+      "2월",
+      "3월",
+      "4월",
+      "5월",
+      "6월",
+      "7월",
+      "8월",
+      "9월",
+      "10월",
+      "11월",
+      "12월",
+   ],
+   shortMonths: [
+      "1월",
+      "2월",
+      "3월",
+      "4월",
+      "5월",
+      "6월",
+      "7월",
+      "8월",
+      "9월",
+      "10월",
+      "11월",
+      "12월",
+   ],
+});
 
 // svg의 너비, 높이 설정하고, g를 붙인 다음 위치를 조정해줌.
 d3.select("div.casesGraph-position").attr(
    "style",
    `width:${casesGraphWidth + margin.left + margin.right}px; height:${
       casesGraphHeight + margin.top + margin.bottom
-   }px;`
+   }px;
+   top:${getGraphTranslateYAmount()}px;`
 );
 
 var caseGraphSvg = d3
@@ -105,27 +164,18 @@ d3.csv(
          .attr("x", 0)
          .attr("y", 0);
 
-      // Add brushing
-      graph_brush = d3
-         .brushX() // Add the brush feature using the d3.brush function
-         .extent([
-            [0, 0],
-            [casesGraphWidth, casesGraphHeight],
-         ]) // initialise the brush area: start at 0,0 and finishes at width,height: it means I select the whole graph area
-         .on("end", updateChart); // Each time the brush selection changes, trigger the 'updateChart' function
-
-      // Create the line variable: where both the line and the brush take place
+      // 그래프 라인이 들어갈 그룹 추가.
       graph_line = caseGraphSvg
          .append("g")
          .attr("clip-path", "url(#clip)")
          .on("mousemove", mousemove)
          .on("mouseout", mouseout);
 
-      // Add the line
+      // 그래프 라인 추가
       graph_line
          .append("path")
          .datum(currentData)
-         .attr("class", "line") // I add the class line to be able to modify this line later on.
+         .attr("class", "line")
          .attr("fill", "none")
          .attr(
             "d",
@@ -141,23 +191,31 @@ d3.csv(
          .attr("stroke", "#ff6f6e")
          .attr("stroke-width", 2.5);
 
-      // Add the brushing
+      // 브러싱 선언.(드래그)
+      graph_brush = d3
+         .brushX()
+         .extent([
+            [0, 0],
+            [casesGraphWidth, casesGraphHeight],
+         ])
+         .on("end", updateChart); // 브러싱이 끝날때 chart를 업데이트하여 줌을 구현
+
+      // 선언된 브러시를 그래프에 추가
       graph_line.append("g").attr("class", "brush").call(graph_brush);
 
-      // A function that update the chart for given boundaries
+      // 드래그 했을시, 선택된 범위로 줌하는 함수
       function updateChart() {
-         // What are the selected boundaries?
+         // 드래그 경계값 가져오기
          extent = d3.event.selection;
-         // If no selection, back to initial coordinate. Otherwise, update X axis domain
+         // 드래그 된 곳이 없거나, 0이라면 실행종료
          if (!extent || extent[1] - extent[0] <= 0) {
             return;
          } else {
             mouseout();
             updateXAxis(graph_x.invert(extent[0]), graph_x.invert(extent[1]));
             graph_line.select(".brush").call(graph_brush.move, null); // This remove the grey brush area as soon as the selection has been done
+            updateLine(false);
          }
-
-         updateLine(false);
       }
 
       // 더블클릭되었을때 초기화.
@@ -194,11 +252,12 @@ d3.csv(
          point.style("opacity", 1);
          caseGraphTooltipContainer.style("opacity", 1);
 
-         // recover coordinate we need
+         // 마우스가 올라간 곳의 데이터를 가져옴
          var x0 = graph_x.invert(d3.mouse(d3.event.currentTarget)[0]);
          var i = bisect(currentData, x0, 1);
          selectedData = currentData[i];
 
+         // 가져온 데이터로 툴팁 띄우기
          point
             .attr("cx", graph_x(selectedData.date))
             .attr("cy", graph_y(selectedData.value));
@@ -245,10 +304,11 @@ d3.csv(
             caseGraphTooltipPrefix.text("국내 일일 확진자 : ");
          }
 
+         // 새로운 데이터로 축 업데이트
          updateXAxis();
          updateYAxis();
 
-         // Give these new data to update line
+         // 새로운 데이터로 그래프 업데이트
          updateLine(true);
       }
    }
@@ -263,7 +323,9 @@ function updateXAxis(xmin, xmax) {
          currentData[currentData.length - 1].date,
       ]);
    }
-   graph_xAxis.transition().call(d3.axisBottom(graph_x));
+   graph_xAxis
+      .transition()
+      .call(d3.axisBottom(graph_x).ticks(casesGraphWidth / 70));
 }
 function updateYAxis() {
    graph_y.domain([
@@ -275,6 +337,7 @@ function updateYAxis() {
    graph_yAxis.transition().call(d3.axisLeft(graph_y));
 }
 
+// 그래프 라인 업데이트 함수
 function updateLine(doDatum) {
    if (doDatum) {
       return graph_line
@@ -312,11 +375,13 @@ function updateLine(doDatum) {
    }
 }
 
+// 그래프 초기화 함수
 function initGraph() {
    updateXAxis();
    updateLine(false);
 }
 
+// 더블 탭했을 시 그래프 초기화하도록 함.
 var mylatesttap;
 function doubletap() {
    var now = new Date().getTime();

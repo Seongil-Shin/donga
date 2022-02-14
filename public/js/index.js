@@ -1,9 +1,11 @@
-var rem = parseFloat(getComputedStyle(document.documentElement).fontSize);
+const rem = parseFloat(getComputedStyle(document.documentElement).fontSize);
 
+// 숫자를 받고, 1000단위마다 , 를 추가함
 function numberWithCommas(x) {
    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
+// 8개의 값을 가지는 배열을 받고, 현재 디바이스 사이즈에 맞춰 값을 반환.
 function returnVariableByWidth(array) {
    if (matchMedia("screen and (max-width: 450px)").matches) {
       return array[0];
@@ -50,45 +52,90 @@ function calcTooltlpLeft(origin) {
    return tooltipLeft;
 }
 
-var root = document.getElementById("root");
+const root = document.getElementById("root");
 
-/* 맵 화면 자바스크립트 */
-var wuhanLatLng = { lat: 30.550029315281282, lng: 114.30885603433747 };
-var wuhanAirportLatLng = { lat: 30.77355186933909, lng: 114.22007780459478 };
-var incheonAirportLatLng = { lat: 37.46298629781097, lng: 126.4400117648823 };
-var incheonMedicalCenterLatLng = {
+/* 지도 페이지 */
+const wuhanLatLng = { lat: 30.59647608061125, lng: 114.30766435550818 };
+const wuhanAirportLatLng = { lat: 30.77355186933909, lng: 114.22007780459478 };
+const incheonAirportLatLng = { lat: 37.46298629781097, lng: 126.4400117648823 };
+const incheonMedicalCenterLatLng = {
    lat: 37.478662845170916,
    lng: 126.6685341094497,
 };
-
+30.59647608061125, 114.30766435550818;
 var map;
 var marker;
 
+// 맵 초기화
 function initMap() {
    map = new google.maps.Map(document.getElementById("map"), {
       zoom: 8,
       tilt: 10,
       center: wuhanLatLng,
       disableDefaultUI: true,
-      scrollwheel: false,
       draggable: false,
+      scrollable: false,
    });
 
    marker = new google.maps.Marker({
       position: wuhanLatLng,
       map: map,
    });
+
+   // 맵에 띄울 overlay 정보를 가져오고, 맵에 오버레이를 추가한다.
+   fetch("../assets/datas/polygons.json").then(async function (data) {
+      const res = await data.json();
+      // 가장 바깥쪽 오버레이는 한국, 중국을 모두 포함하도록 크게 그리고,
+      // 나머지는 해당하는 곳만 그려서 hole를 만든다.
+      const bermudaTriangle = new google.maps.Polygon({
+         paths: [
+            [
+               { lat: 39.2269791853057, lng: 101.5990105417349 },
+               { lat: 41.31746965387336, lng: 136.73888720227237 },
+               { lat: 24.588422898812478, lng: 136.8194832496589 },
+               { lat: 24.588422898812478, lng: 100.55126192570971 },
+            ],
+            // 우한시
+            res.wuhan,
+            res.wuhanAirport,
+            res.incheonAirport,
+            [
+               // 인천 병원
+               { lat: 37.478488733535436, lng: 126.66753531892762 },
+               { lat: 37.47784831453108, lng: 126.66878887168434 },
+               { lat: 37.47824319804417, lng: 126.66910784185147 },
+               { lat: 37.47820016596777, lng: 126.66918758439323 },
+               { lat: 37.47872667437579, lng: 126.66961181471548 },
+               { lat: 37.47942783606341, lng: 126.66828808852199 },
+            ],
+         ],
+         strokeColor: "black",
+         strokeOpacity: 0.33,
+         strokeWeight: 1,
+         fillColor: "black",
+         fillOpacity: 0.33,
+      });
+
+      bermudaTriangle.setMap(map);
+   });
 }
 
+// 같은 이벤트가 같은 페이지에서 여러번 연속으로 발동하지 않도록 함.
 var canTrigger = [true, true, true, true];
 var mapLocation = [
    { zoom: 12, latLng: wuhanLatLng, marker: false },
-   { zoom: 13, latLng: wuhanAirportLatLng, marker: true },
+   {
+      zoom: 13,
+      latLng: wuhanAirportLatLng,
+      marker: true,
+   },
    { zoom: 13, latLng: incheonAirportLatLng, marker: true },
-   { zoom: 14, latLng: incheonMedicalCenterLatLng, marker: true },
+   { zoom: 16, latLng: incheonMedicalCenterLatLng, marker: true },
 ];
 
-function handleScrollEvent(e) {
+// 맵 페이지 스크롤 이벤트 처리 함수
+// 해당하는 슬라이드마다 적절한 위치로 이동시키며 줌한다.
+function handleMapScrollEvent(e) {
    var scrollTop = e.target.scrollTop;
    var wHeight = window.innerHeight;
 
@@ -106,7 +153,9 @@ function handleScrollEvent(e) {
             map.panTo(mapLocation[i].latLng);
             setTimeout(() => map.setZoom(mapLocation[i].zoom), 500);
 
+            // 기존 마커 지우기
             marker.setVisible(false);
+            // 새로운 마커 등록
             marker = new google.maps.Marker({
                position: mapLocation[i].latLng,
                map: map,
@@ -117,33 +166,53 @@ function handleScrollEvent(e) {
       }
    } else {
       canTrigger = canTrigger.map((v) => true);
-      map.setZoom(13);
+      map.setZoom(15);
    }
 }
 
-var root = document.getElementById("root");
-root.addEventListener("scroll", handleScrollEvent);
+root.addEventListener("scroll", handleMapScrollEvent);
 
-/* 지구본 화면 자바스크립트 */
-var sens = 75,
-   focused;
+/* 지구본 페이지 */
+// 드래그 sensitivity
+const sens = 75;
 
+// nations 페이지 상단의 슬라이드 높이
+const nations_slideHeight =
+   document.querySelector("#nations-container > section.slide").clientHeight +
+   20;
+
+// 지구본 확대하는 정도.
 var globeScale = returnVariableByWidth([
    150, 200, 250, 200, 200, 250, 300, 350,
 ]);
+// 지구본 확대 정도에 따른 지구본 높이
+const globeHeight = {
+   150: 300,
+   200: 400,
+   250: 500,
+   300: 600,
+   350: 700,
+};
+
+// height가 너무 작은 디바이스에서는 적절히 아래로 내림
+function getGlobeTranslateYAmount() {
+   return (window.innerHeight - globeHeight[globeScale]) / 2 <
+      nations_slideHeight
+      ? nations_slideHeight + globeHeight[globeScale] / 2
+      : window.innerHeight / 2;
+}
 
 //Setting projection
 var projection = d3
    .geoOrthographic()
    .scale(globeScale)
    .rotate([-127, -37])
-   .translate([window.innerWidth / 2, window.innerHeight / 2])
+   .translate([window.innerWidth / 2, getGlobeTranslateYAmount()])
    .clipAngle(90);
 
 var nationsPath = d3.geoPath().projection(projection);
 
 //SVG container
-
 var nationsSvg = d3.select("svg#nations");
 
 // 툴팁
@@ -158,6 +227,7 @@ var countryById = {};
 
 // 지구본 띄울 그룹 생성
 var globeGroup = nationsSvg.append("g");
+
 //Adding water
 globeGroup
    .append("path")
@@ -195,37 +265,26 @@ function ready(values) {
          (item) => countryById[item.id] !== undefined
       );
 
+   // 데이터가 존재하는 국가 렌더
+   var prevTouchedIdx = 10;
    var countriesSelected = topojson.feature(
       values[0],
       values[0].objects.countries
    ).features;
-   var countriesUnselected = topojson.feature(
-      countriesUnselectedValues,
-      countriesUnselectedValues.objects.countries
-   ).features;
 
-   //Drawing countries on the globe
-   // 데이터가 없는 국가 렌더
-   globeGroup
-      .selectAll("path.land")
-      .data(countriesUnselected)
-      .enter()
-      .append("path")
-      .attr("class", "land")
-      .attr("d", nationsPath);
-
-   // 데이터가 존재하는 국가 렌더
-   var prevTouchedIdx = 10;
    globeGroup
       .selectAll("path.land")
       .data(countriesSelected)
       .enter()
       .append("path")
       .attr("class", "land-selected")
+      .attr("id", function (d) {
+         return "path" + d.id;
+      })
       .attr("d", nationsPath)
 
       //Mouse events
-      .on("mouseover", function (d) {
+      .on("mouseover", function (d, idx, arr) {
          showNationsTooltip(d);
       })
       .on("mouseout", function (d) {
@@ -245,6 +304,20 @@ function ready(values) {
          prevTouchedIdx = touchedIdx;
          showNationsTooltip(d);
       });
+
+   // 데이터가 없는 국가 렌더
+   var countriesUnselected = topojson.feature(
+      countriesUnselectedValues,
+      countriesUnselectedValues.objects.countries
+   ).features;
+
+   globeGroup
+      .selectAll("path.land")
+      .data(countriesUnselected)
+      .enter()
+      .append("path")
+      .attr("class", "land")
+      .attr("d", nationsPath);
 
    //Drag event
    globeGroup.call(
@@ -275,23 +348,27 @@ function showNationsTooltip(data) {
 function hideNationsTooltop() {
    nationsCountryTooltip.style("opacity", 0);
 }
+
 function updateProjection(updateFunction) {
    updateFunction();
    nationsPath = d3.geoPath().projection(projection);
    nationsSvg.selectAll("path").attr("d", nationsPath);
 }
 
+// resize 이벤트 발생시, 지구본 위치 조정
 window.addEventListener("resize", nations_handleResize);
 function nations_handleResize() {
    updateProjection(function () {
-      projection.translate([window.innerWidth / 2, window.innerHeight / 2]);
+      projection.translate([window.innerWidth / 2, getGlobeTranslateYAmount()]);
    });
 }
 
-/* 그래프 화면 자바스크립트*/
+/* 그래프 페이지 */
 
-var margin = { top: 10, right: 30, bottom: 50, left: 60 };
-var casesGraphWidth = returnVariableByWidth([
+// 그래프 마진
+const margin = { top: 10, right: 30, bottom: 50, left: 60 };
+// 반응형 조절
+const casesGraphWidth = returnVariableByWidth([
       window.innerWidth - 100,
       window.innerWidth - 100,
       window.innerWidth - 150,
@@ -301,14 +378,71 @@ var casesGraphWidth = returnVariableByWidth([
       window.innerWidth - 600,
       window.innerWidth - 800,
    ]),
-   casesGraphHeight = window.innerHeight / 2; // 반응형 조절
+   casesGraphHeight = window.innerHeight / 2;
+
+// 그래프 페이지 상단의 슬라이드 높이
+const graph_slideHeight =
+   document.querySelector("#graph-container > section.slide").clientHeight + 20;
+
+// height가 너무 작은 디바이스에서는 적절히 아래로 내림
+function getGraphTranslateYAmount() {
+   return (window.innerHeight - casesGraphHeight + margin.top + margin.bottom) /
+      2 <
+      nations_slideHeight
+      ? nations_slideHeight +
+           (casesGraphHeight + margin.top + margin.bottom) / 2
+      : window.innerHeight / 2;
+}
+
+// d3 언어설정
+d3.timeFormatDefaultLocale({
+   decimal: ".",
+   thousands: ",",
+   grouping: [3],
+   currency: ["$", ""],
+   dateTime: "%a %b %e %X %Y",
+   date: "%Y/%m/%d",
+   time: "%H:%M:%S",
+   periods: ["AM", "PM"],
+   days: ["일", "월", "화", "수", "목", "금", "토"],
+   shortDays: ["일", "월", "화", "수", "목", "금", "토"],
+   months: [
+      "1월",
+      "2월",
+      "3월",
+      "4월",
+      "5월",
+      "6월",
+      "7월",
+      "8월",
+      "9월",
+      "10월",
+      "11월",
+      "12월",
+   ],
+   shortMonths: [
+      "1월",
+      "2월",
+      "3월",
+      "4월",
+      "5월",
+      "6월",
+      "7월",
+      "8월",
+      "9월",
+      "10월",
+      "11월",
+      "12월",
+   ],
+});
 
 // svg의 너비, 높이 설정하고, g를 붙인 다음 위치를 조정해줌.
 d3.select("div.casesGraph-position").attr(
    "style",
    `width:${casesGraphWidth + margin.left + margin.right}px; height:${
       casesGraphHeight + margin.top + margin.bottom
-   }px;`
+   }px;
+   top:${getGraphTranslateYAmount()}px;`
 );
 
 var caseGraphSvg = d3
@@ -397,27 +531,18 @@ d3.csv(
          .attr("x", 0)
          .attr("y", 0);
 
-      // Add brushing
-      graph_brush = d3
-         .brushX() // Add the brush feature using the d3.brush function
-         .extent([
-            [0, 0],
-            [casesGraphWidth, casesGraphHeight],
-         ]) // initialise the brush area: start at 0,0 and finishes at width,height: it means I select the whole graph area
-         .on("end", updateChart); // Each time the brush selection changes, trigger the 'updateChart' function
-
-      // Create the line variable: where both the line and the brush take place
+      // 그래프 라인이 들어갈 그룹 추가.
       graph_line = caseGraphSvg
          .append("g")
          .attr("clip-path", "url(#clip)")
          .on("mousemove", mousemove)
          .on("mouseout", mouseout);
 
-      // Add the line
+      // 그래프 라인 추가
       graph_line
          .append("path")
          .datum(currentData)
-         .attr("class", "line") // I add the class line to be able to modify this line later on.
+         .attr("class", "line")
          .attr("fill", "none")
          .attr(
             "d",
@@ -433,23 +558,31 @@ d3.csv(
          .attr("stroke", "#ff6f6e")
          .attr("stroke-width", 2.5);
 
-      // Add the brushing
+      // 브러싱 선언.(드래그)
+      graph_brush = d3
+         .brushX()
+         .extent([
+            [0, 0],
+            [casesGraphWidth, casesGraphHeight],
+         ])
+         .on("end", updateChart); // 브러싱이 끝날때 chart를 업데이트하여 줌을 구현
+
+      // 선언된 브러시를 그래프에 추가
       graph_line.append("g").attr("class", "brush").call(graph_brush);
 
-      // A function that update the chart for given boundaries
+      // 드래그 했을시, 선택된 범위로 줌하는 함수
       function updateChart() {
-         // What are the selected boundaries?
+         // 드래그 경계값 가져오기
          extent = d3.event.selection;
-         // If no selection, back to initial coordinate. Otherwise, update X axis domain
+         // 드래그 된 곳이 없거나, 0이라면 실행종료
          if (!extent || extent[1] - extent[0] <= 0) {
             return;
          } else {
             mouseout();
             updateXAxis(graph_x.invert(extent[0]), graph_x.invert(extent[1]));
             graph_line.select(".brush").call(graph_brush.move, null); // This remove the grey brush area as soon as the selection has been done
+            updateLine(false);
          }
-
-         updateLine(false);
       }
 
       // 더블클릭되었을때 초기화.
@@ -486,11 +619,12 @@ d3.csv(
          point.style("opacity", 1);
          caseGraphTooltipContainer.style("opacity", 1);
 
-         // recover coordinate we need
+         // 마우스가 올라간 곳의 데이터를 가져옴
          var x0 = graph_x.invert(d3.mouse(d3.event.currentTarget)[0]);
          var i = bisect(currentData, x0, 1);
          selectedData = currentData[i];
 
+         // 가져온 데이터로 툴팁 띄우기
          point
             .attr("cx", graph_x(selectedData.date))
             .attr("cy", graph_y(selectedData.value));
@@ -537,10 +671,11 @@ d3.csv(
             caseGraphTooltipPrefix.text("국내 일일 확진자 : ");
          }
 
+         // 새로운 데이터로 축 업데이트
          updateXAxis();
          updateYAxis();
 
-         // Give these new data to update line
+         // 새로운 데이터로 그래프 업데이트
          updateLine(true);
       }
    }
@@ -555,7 +690,9 @@ function updateXAxis(xmin, xmax) {
          currentData[currentData.length - 1].date,
       ]);
    }
-   graph_xAxis.transition().call(d3.axisBottom(graph_x));
+   graph_xAxis
+      .transition()
+      .call(d3.axisBottom(graph_x).ticks(casesGraphWidth / 70));
 }
 function updateYAxis() {
    graph_y.domain([
@@ -567,6 +704,7 @@ function updateYAxis() {
    graph_yAxis.transition().call(d3.axisLeft(graph_y));
 }
 
+// 그래프 라인 업데이트 함수
 function updateLine(doDatum) {
    if (doDatum) {
       return graph_line
@@ -604,11 +742,13 @@ function updateLine(doDatum) {
    }
 }
 
+// 그래프 초기화 함수
 function initGraph() {
    updateXAxis();
    updateLine(false);
 }
 
+// 더블 탭했을 시 그래프 초기화하도록 함.
 var mylatesttap;
 function doubletap() {
    var now = new Date().getTime();
@@ -621,14 +761,12 @@ function doubletap() {
    mylatesttap = new Date().getTime();
 }
 
-/* 예방 화면 자바스크립트*/
-const preventContainerOffsetT =
-   document.getElementById("prevent-container").offsetTop;
+/* prevent 페이지 */
 const preventImageElements = [
    {
       ele: document.getElementsByClassName("prevent-image-house")[0],
       speed: 1,
-      show: 1,
+      showAt: 1,
       html: "<b>집</b> <br /><br />\
       외출하고 집에 돌아온 뒤에는 손을 씻어야 한다. 흐르는\
       물에 비누로 30초 이상 손을 씻는 것이 좋다. 동거인이\
@@ -638,7 +776,7 @@ const preventImageElements = [
    {
       ele: document.getElementsByClassName("prevent-image-bus")[0],
       speed: 1.4,
-      show: 26.25,
+      showAt: 26.25,
       html: "<b>대중교통</b> <br /><br />\
       대중교통이 붐비는 출퇴근 시간은 피하고, 가까운 거리를\
       이동할 경우 걷는 것도 좋다. 대중교통을 이용한 뒤에는\
@@ -647,7 +785,7 @@ const preventImageElements = [
    {
       ele: document.getElementsByClassName("prevent-image-school")[0],
       speed: 1,
-      show: 54,
+      showAt: 54,
       html: "<b>학교</b> <br /><br />\
       등교 전 건강상태를 확인한다. 발열 등 코로나19 의심\
       증상이 있을 경우 등교하지 않는다. 교실에서는 상시\
@@ -655,12 +793,19 @@ const preventImageElements = [
       중요하다.",
    },
 ];
+
 var pv_lastShowTextIdx = -1;
 var prevent_fixedTextEle = document.getElementsByClassName("prevent-fixed")[0];
 var prevent_scene = document.getElementsByClassName("prevent-scene")[0];
+
 function handlePreventScroll(e) {
-   const curOffset = e.target.scrollTop - preventContainerOffsetT;
+   // 음수면 아직 prevent 페이지보다 위에 있음. 0이상이면 prevent 페이지에 있다는 것.
+   const curOffset =
+      e.target.scrollTop -
+      document.getElementById("prevent-container").offsetTop;
+
    if (curOffset > 0) {
+      // 적절히 이미지를 이동시키고, 텍스트를 띄움.
       preventEntered = true;
       prevent_scene.setAttribute(
          "style",
@@ -672,7 +817,9 @@ function handlePreventScroll(e) {
             `transform: translateX(-${curOffset * item.speed}px)`
          );
 
-         if (curOffset >= item.show * rem && pv_lastShowTextIdx !== idx) {
+         // showAt으로 지정한 위치까지 오면 텍스트를 띄움.
+         // 30rem보다 작은 디바이스에서는 fixed 슬라이드에 띄움.
+         if (curOffset >= item.showAt * rem && pv_lastShowTextIdx !== idx) {
             if (window.innerWidth <= 30 * rem) {
                prevent_fixedTextEle.innerHTML = item.html;
             } else {
@@ -687,6 +834,7 @@ function handlePreventScroll(e) {
          }
       });
    } else if (pv_lastShowTextIdx !== -1) {
+      // prevent 페이지가 아니면 글자를 지움.
       prevent_fixedTextEle.innerHTML = "";
       preventImageElements[
          pv_lastShowTextIdx

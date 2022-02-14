@@ -9,6 +9,7 @@ const incheonMedicalCenterLatLng = {
 var map;
 var marker;
 
+// 맵 초기화
 function initMap() {
    map = new google.maps.Map(document.getElementById("map"), {
       zoom: 8,
@@ -24,8 +25,11 @@ function initMap() {
       map: map,
    });
 
+   // 맵에 띄울 overlay 정보를 가져오고, 맵에 오버레이를 추가한다.
    fetch("../assets/datas/polygons.json").then(async function (data) {
       const res = await data.json();
+      // 가장 바깥쪽 오버레이는 한국, 중국을 모두 포함하도록 크게 그리고,
+      // 나머지는 해당하는 곳만 그려서 hole를 만든다.
       const bermudaTriangle = new google.maps.Polygon({
          paths: [
             [
@@ -59,6 +63,7 @@ function initMap() {
    });
 }
 
+// 같은 이벤트가 같은 페이지에서 여러번 연속으로 발동하지 않도록 함.
 var canTrigger = [true, true, true, true];
 var mapLocation = [
    { zoom: 12, latLng: wuhanLatLng, marker: false },
@@ -71,7 +76,9 @@ var mapLocation = [
    { zoom: 16, latLng: incheonMedicalCenterLatLng, marker: true },
 ];
 
-function handleScrollEvent(e) {
+// 맵 페이지 스크롤 이벤트 처리 함수
+// 해당하는 슬라이드마다 적절한 위치로 이동시키며 줌한다.
+function handleMapScrollEvent(e) {
    var scrollTop = e.target.scrollTop;
    var wHeight = window.innerHeight;
 
@@ -89,7 +96,9 @@ function handleScrollEvent(e) {
             map.panTo(mapLocation[i].latLng);
             setTimeout(() => map.setZoom(mapLocation[i].zoom), 500);
 
+            // 기존 마커 지우기
             marker.setVisible(false);
+            // 새로운 마커 등록
             marker = new google.maps.Marker({
                position: mapLocation[i].latLng,
                map: map,
@@ -104,4 +113,4 @@ function handleScrollEvent(e) {
    }
 }
 
-root.addEventListener("scroll", handleScrollEvent);
+root.addEventListener("scroll", handleMapScrollEvent);

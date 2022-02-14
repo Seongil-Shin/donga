@@ -1,22 +1,43 @@
-var sens = 75,
-   focused;
+// 드래그 sensitivity
+const sens = 75;
 
+// nations 페이지 상단의 슬라이드 높이
+const nations_slideHeight =
+   document.querySelector("#nations-container > section.slide").clientHeight +
+   20;
+
+// 지구본 확대하는 정도.
 var globeScale = returnVariableByWidth([
    150, 200, 250, 200, 200, 250, 300, 350,
 ]);
+// 지구본 확대 정도에 따른 지구본 높이
+const globeHeight = {
+   150: 300,
+   200: 400,
+   250: 500,
+   300: 600,
+   350: 700,
+};
+
+// height가 너무 작은 디바이스에서는 적절히 아래로 내림
+function getGlobeTranslateYAmount() {
+   return (window.innerHeight - globeHeight[globeScale]) / 2 <
+      nations_slideHeight
+      ? nations_slideHeight + globeHeight[globeScale] / 2
+      : window.innerHeight / 2;
+}
 
 //Setting projection
 var projection = d3
    .geoOrthographic()
    .scale(globeScale)
    .rotate([-127, -37])
-   .translate([window.innerWidth / 2, window.innerHeight / 2])
+   .translate([window.innerWidth / 2, getGlobeTranslateYAmount()])
    .clipAngle(90);
 
 var nationsPath = d3.geoPath().projection(projection);
 
 //SVG container
-
 var nationsSvg = d3.select("svg#nations");
 
 // 툴팁
@@ -31,6 +52,7 @@ var countryById = {};
 
 // 지구본 띄울 그룹 생성
 var globeGroup = nationsSvg.append("g");
+
 //Adding water
 globeGroup
    .append("path")
@@ -81,10 +103,13 @@ function ready(values) {
       .enter()
       .append("path")
       .attr("class", "land-selected")
+      .attr("id", function (d) {
+         return "path" + d.id;
+      })
       .attr("d", nationsPath)
 
       //Mouse events
-      .on("mouseover", function (d) {
+      .on("mouseover", function (d, idx, arr) {
          showNationsTooltip(d);
       })
       .on("mouseout", function (d) {
@@ -148,15 +173,17 @@ function showNationsTooltip(data) {
 function hideNationsTooltop() {
    nationsCountryTooltip.style("opacity", 0);
 }
+
 function updateProjection(updateFunction) {
    updateFunction();
    nationsPath = d3.geoPath().projection(projection);
    nationsSvg.selectAll("path").attr("d", nationsPath);
 }
 
+// resize 이벤트 발생시, 지구본 위치 조정
 window.addEventListener("resize", nations_handleResize);
 function nations_handleResize() {
    updateProjection(function () {
-      projection.translate([window.innerWidth / 2, window.innerHeight / 2]);
+      projection.translate([window.innerWidth / 2, getGlobeTranslateYAmount()]);
    });
 }

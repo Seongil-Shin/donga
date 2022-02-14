@@ -6,9 +6,6 @@ body {
    padding: 0;
    margin: 0;
    font-family: "Noto Sans KR", sans-serif;
-
-   overflow: hidden;
-   touch-action: none;
 }
 
 p {
@@ -18,7 +15,7 @@ p {
 #root {
    position: relative;
    width: 100vw;
-   height: calc(var(--vh, 1vh) * 100);
+   height: 100vh;
    overflow-x: hidden;
    overflow-y: scroll;
 
@@ -26,9 +23,6 @@ p {
 }
 .snapPoint {
    scroll-snap-align: start;
-}
-.snapPoint-end {
-   scroll-snap-align: end !important;
 }
 .container {
    position: relative;
@@ -40,13 +34,13 @@ p {
    position: sticky;
    top: 0;
    width: 100%;
-   height: calc(var(--vh, 1vh) * 100);
+   height: 100vh;
 }
 
 .slide-container {
    position: relative;
    width: 100vw;
-   height: calc(var(--vh, 1vh) * 100);
+   height: 100vh;
    pointer-events: none;
 }
 

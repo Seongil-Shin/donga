@@ -1,9 +1,11 @@
 const rem = parseFloat(getComputedStyle(document.documentElement).fontSize);
 
+// 숫자를 받고, 1000단위마다 , 를 추가함
 function numberWithCommas(x) {
    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
+// 8개의 값을 가지는 배열을 받고, 현재 디바이스 사이즈에 맞춰 값을 반환.
 function returnVariableByWidth(array) {
    if (matchMedia("screen and (max-width: 450px)").matches) {
       return array[0];
@@ -51,22 +53,3 @@ function calcTooltlpLeft(origin) {
 }
 
 const root = document.getElementById("root");
-
-function setScreenSize() {
-   let vh = window.innerHeight * 0.01;
-
-   document.documentElement.style.setProperty("--vh", `${vh}px`);
-}
-
-setScreenSize();
-window.addEventListener("resize", setScreenSize);
-
-document
-   .querySelector("body")
-   .addEventListener("touchmove", this.removeEvent, { passive: false });
-document
-   .querySelector("body")
-   .addEventListener("onclick", this.removeEvent, { passive: false });
-document
-   .querySelector("body")
-   .addEventListener("mousewheel", this.removeEvent, { passive: false });

@@ -24,9 +24,6 @@ p {
 .snapPoint {
    scroll-snap-align: start;
 }
-.snapPoint-end {
-   scroll-snap-align: end !important;
-}
 .container {
    position: relative;
    width: 100%;
@@ -165,12 +162,15 @@ p {
 
 /* 지도 페이지 스타일 */
 .map-container {
-   height: 500vh;
+   height: 550vh;
 }
 
 #map {
    width: 100%;
    height: 100vh;
+}
+.map-slide {
+   height: 110vh;
 }
 
 /* 지구본 페이지 스타일 */
@@ -179,7 +179,7 @@ p {
    background-color: #2f353f;
 }
 
-#nations {
+#nations > g {
    cursor: move;
 }
 
@@ -215,14 +215,12 @@ p {
 
 #casesGraph {
    position: absolute;
-   top: 50%;
-   left: 50%;
-
+   width: 100%;
+   height: 100%;
+   left: 0;
+   top: 0;
    background-color: #f9f9f9;
    border-radius: 1rem;
-
-   overflow: visible;
-   transform: translate(-50%, -50%);
 }
 
 #casesGraph .point {
@@ -238,23 +236,20 @@ p {
    position: absolute;
    z-index: 100;
 }
+
 .casesGraph-position {
    position: absolute;
    top: 50%;
    left: 50%;
    transform: translate(-50%, -50%);
 }
-#casesGraph {
-   width: 100%;
-   height: 100%;
-}
+
 #selectButton {
    top: 10px;
    left: 70px;
 }
 
-/* 예방 화면 스타일 */
-
+/* prevent 페이지 */
 .prevent-container {
    width: 100vw;
    height: 130rem;
@@ -349,7 +344,6 @@ p {
 }
 
 .prevent-fixed {
-   visibility: hidden;
    box-sizing: border-box;
    position: fixed;
    top: 10px;
@@ -378,6 +372,7 @@ p {
       bottom: 2rem;
    }
 }
+
 @media screen and (max-width: 30rem) {
    .prevent-fixed {
       visibility: visible;
