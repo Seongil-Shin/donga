@@ -68,14 +68,13 @@ function ready(values) {
          (item) => countryById[item.id] !== undefined
       );
 
-   //Drawing countries on the globe
-
    // 데이터가 존재하는 국가 렌더
    var prevTouchedIdx = 10;
    var countriesSelected = topojson.feature(
       values[0],
       values[0].objects.countries
    ).features;
+
    globeGroup
       .selectAll("path.land")
       .data(countriesSelected)

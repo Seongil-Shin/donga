@@ -1,4 +1,4 @@
-var rem = parseFloat(getComputedStyle(document.documentElement).fontSize);
+const rem = parseFloat(getComputedStyle(document.documentElement).fontSize);
 
 function numberWithCommas(x) {
    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -50,7 +50,7 @@ function calcTooltlpLeft(origin) {
    return tooltipLeft;
 }
 
-var root = document.getElementById("root");
+const root = document.getElementById("root");
 
 function setScreenSize() {
    let vh = window.innerHeight * 0.01;
@@ -60,3 +60,13 @@ function setScreenSize() {
 
 setScreenSize();
 window.addEventListener("resize", setScreenSize);
+
+document
+   .querySelector("body")
+   .addEventListener("touchmove", this.removeEvent, { passive: false });
+document
+   .querySelector("body")
+   .addEventListener("onclick", this.removeEvent, { passive: false });
+document
+   .querySelector("body")
+   .addEventListener("mousewheel", this.removeEvent, { passive: false });

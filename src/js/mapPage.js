@@ -1,11 +1,11 @@
-var wuhanLatLng = { lat: 30.550029315281282, lng: 114.30885603433747 };
-var wuhanAirportLatLng = { lat: 30.77355186933909, lng: 114.22007780459478 };
-var incheonAirportLatLng = { lat: 37.46298629781097, lng: 126.4400117648823 };
-var incheonMedicalCenterLatLng = {
+const wuhanLatLng = { lat: 30.59647608061125, lng: 114.30766435550818 };
+const wuhanAirportLatLng = { lat: 30.77355186933909, lng: 114.22007780459478 };
+const incheonAirportLatLng = { lat: 37.46298629781097, lng: 126.4400117648823 };
+const incheonMedicalCenterLatLng = {
    lat: 37.478662845170916,
    lng: 126.6685341094497,
 };
-
+30.59647608061125, 114.30766435550818;
 var map;
 var marker;
 
@@ -15,22 +15,60 @@ function initMap() {
       tilt: 10,
       center: wuhanLatLng,
       disableDefaultUI: true,
-      scrollwheel: false,
       draggable: false,
+      scrollable: false,
    });
 
    marker = new google.maps.Marker({
       position: wuhanLatLng,
       map: map,
    });
+
+   fetch("../assets/datas/polygons.json").then(async function (data) {
+      const res = await data.json();
+      const bermudaTriangle = new google.maps.Polygon({
+         paths: [
+            [
+               { lat: 39.2269791853057, lng: 101.5990105417349 },
+               { lat: 41.31746965387336, lng: 136.73888720227237 },
+               { lat: 24.588422898812478, lng: 136.8194832496589 },
+               { lat: 24.588422898812478, lng: 100.55126192570971 },
+            ],
+            // 우한시
+            res.wuhan,
+            res.wuhanAirport,
+            res.incheonAirport,
+            [
+               // 인천 병원
+               { lat: 37.478488733535436, lng: 126.66753531892762 },
+               { lat: 37.47784831453108, lng: 126.66878887168434 },
+               { lat: 37.47824319804417, lng: 126.66910784185147 },
+               { lat: 37.47820016596777, lng: 126.66918758439323 },
+               { lat: 37.47872667437579, lng: 126.66961181471548 },
+               { lat: 37.47942783606341, lng: 126.66828808852199 },
+            ],
+         ],
+         strokeColor: "black",
+         strokeOpacity: 0.33,
+         strokeWeight: 1,
+         fillColor: "black",
+         fillOpacity: 0.33,
+      });
+
+      bermudaTriangle.setMap(map);
+   });
 }
 
 var canTrigger = [true, true, true, true];
 var mapLocation = [
    { zoom: 12, latLng: wuhanLatLng, marker: false },
-   { zoom: 13, latLng: wuhanAirportLatLng, marker: true },
+   {
+      zoom: 13,
+      latLng: wuhanAirportLatLng,
+      marker: true,
+   },
    { zoom: 13, latLng: incheonAirportLatLng, marker: true },
-   { zoom: 14, latLng: incheonMedicalCenterLatLng, marker: true },
+   { zoom: 16, latLng: incheonMedicalCenterLatLng, marker: true },
 ];
 
 function handleScrollEvent(e) {
@@ -62,10 +100,8 @@ function handleScrollEvent(e) {
       }
    } else {
       canTrigger = canTrigger.map((v) => true);
-      map.setZoom(13);
+      map.setZoom(15);
    }
 }
 
-var root = document.getElementById("root");
 root.addEventListener("scroll", handleScrollEvent);
-
