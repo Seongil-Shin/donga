@@ -19,9 +19,10 @@ p {
    overflow-x: hidden;
    overflow-y: scroll;
 
-   scroll-snap-type: y proximity;
+   scroll-snap-type: y mandatory;
 }
 .snapPoint {
+   scroll-snap-stop: always;
    scroll-snap-align: start;
 }
 .container {
