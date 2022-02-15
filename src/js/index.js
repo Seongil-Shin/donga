@@ -52,4 +52,6 @@ function calcTooltlpLeft(origin) {
    return tooltipLeft;
 }
 
-const root = document.getElementById("root");
+const root = document.getElementById("fullpage");
+
+const pageable = new Pageable("#fullpage");

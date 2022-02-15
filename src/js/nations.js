@@ -3,8 +3,7 @@ const sens = 75;
 
 // nations 페이지 상단의 슬라이드 높이
 const nations_slideHeight =
-   document.querySelector("#nations-container > section.slide").clientHeight +
-   20;
+   document.querySelector("#page-3 > section.slide").clientHeight + 20;
 
 // 지구본 확대하는 정도.
 var globeScale = returnVariableByWidth([
