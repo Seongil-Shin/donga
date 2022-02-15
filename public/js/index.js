@@ -278,9 +278,6 @@ function ready(values) {
       .enter()
       .append("path")
       .attr("class", "land-selected")
-      .attr("id", function (d) {
-         return "path" + d.id;
-      })
       .attr("d", nationsPath)
 
       //Mouse events
