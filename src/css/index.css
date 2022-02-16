@@ -3,13 +3,12 @@ html {
 }
 
 body {
-   padding: 0;
-   margin: 0;
-   font-family: "Noto Sans KR", sans-serif;
-
    position: fixed;
    overflow: hidden;
    touch-action: none;
+   padding: 0;
+   margin: 0;
+   font-family: "Noto Sans KR", sans-serif;
 }
 
 p {
@@ -23,7 +22,7 @@ p {
    overflow-x: hidden;
    overflow-y: scroll;
 
-   scroll-snap-type: y mandatory;
+   scroll-snap-type: y proximity;
 }
 .snapPoint {
    scroll-snap-stop: always;
